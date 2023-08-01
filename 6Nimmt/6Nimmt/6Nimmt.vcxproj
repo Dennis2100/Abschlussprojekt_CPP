@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\DHBW_Informationstechnik_2022\C++\Abschlussprojekt\6Nimmt\6_Nimmt_Klassen</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,6 +129,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="6Nimmt.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\6_Nimmt_Klassen\6_Nimmt_Klassen.vcxproj">
+      <Project>{c70da4fa-2f33-499a-87d7-5f3c8242d0e5}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

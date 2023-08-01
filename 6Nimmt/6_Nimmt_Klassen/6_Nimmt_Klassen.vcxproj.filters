@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien\System">
+      <UniqueIdentifier>{a8fdb445-3d7f-402a-8574-0aed207f17d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\System">
+      <UniqueIdentifier>{ee929d71-8968-4e52-b256-ec26ed19e334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Spieler">
+      <UniqueIdentifier>{0d9cb87b-1106-4b91-a9fb-82c18895c006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Spieler\Bots">
+      <UniqueIdentifier>{742675e6-e74b-4e3a-b6d6-35538ae4b1d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Spieler">
+      <UniqueIdentifier>{2bd3e3e9-66bf-488f-b0af-3106088a2f33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Spieler\Bots">
+      <UniqueIdentifier>{f7cec971-c1b9-4fcf-a462-8dfe290134d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Deck">
+      <UniqueIdentifier>{e2e0f3f6-2b53-41ad-ac1e-09907e9f6578}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Deck">
+      <UniqueIdentifier>{9f68fb6b-4533-4105-8918-d548b3ddc745}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Headerdateien\System</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Headerdateien\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Steuerung.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Bot.h">
+      <Filter>Headerdateien\Spieler\Bots</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Spielfeld.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SchlauerBot.h">
+      <Filter>Headerdateien\Spieler\Bots</Filter>
+    </ClInclude>
+    <ClInclude Include="ZufallsBot.h">
+      <Filter>Headerdateien\Spieler\Bots</Filter>
+    </ClInclude>
+    <ClInclude Include="Spieler.h">
+      <Filter>Headerdateien\Spieler</Filter>
+    </ClInclude>
+    <ClInclude Include="Mensch.h">
+      <Filter>Headerdateien\Spieler</Filter>
+    </ClInclude>
+    <ClInclude Include="Deck.h">
+      <Filter>Headerdateien\Deck</Filter>
+    </ClInclude>
+    <ClInclude Include="Karte.h">
+      <Filter>Headerdateien\Deck</Filter>
+    </ClInclude>
+    <ClInclude Include="KonsolenOperation.h">
+      <Filter>Headerdateien\Deck</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Steuerung.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Quelldateien\System</Filter>
+    </ClCompile>
+    <ClCompile Include="6_Nimmt_Klassen.cpp">
+      <Filter>Quelldateien\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Bot.cpp">
+      <Filter>Quelldateien\Spieler\Bots</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Spielfeld.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SchlauerBot.cpp">
+      <Filter>Quelldateien\Spieler\Bots</Filter>
+    </ClCompile>
+    <ClCompile Include="ZufallsBot.cpp">
+      <Filter>Quelldateien\Spieler\Bots</Filter>
+    </ClCompile>
+    <ClCompile Include="Spieler.cpp">
+      <Filter>Quelldateien\Spieler</Filter>
+    </ClCompile>
+    <ClCompile Include="Mensch.cpp">
+      <Filter>Quelldateien\Spieler</Filter>
+    </ClCompile>
+    <ClCompile Include="Deck.cpp">
+      <Filter>Quelldateien\Deck</Filter>
+    </ClCompile>
+    <ClCompile Include="Karte.cpp">
+      <Filter>Quelldateien\Deck</Filter>
+    </ClCompile>
+    <ClCompile Include="KonsolenOperation.cpp">
+      <Filter>Quelldateien\Deck</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

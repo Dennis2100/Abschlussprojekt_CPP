@@ -1,0 +1,5 @@
+﻿  6Nimmt.cpp
+C:\DHBW_Informationstechnik_2022\C++\Abschlussprojekt\6Nimmt\6_Nimmt_Klassen\Spieler.h(7,8): warning C4200: Nicht dem Standard entsprechende Erweiterung: Null-Array in Struktur/Union
+C:\DHBW_Informationstechnik_2022\C++\Abschlussprojekt\6Nimmt\6_Nimmt_Klassen\Spieler.h(7,8): message : Dieser Member wird vom Standardkonstruktor oder Zuweisungsoperator für Kopieren/Verschieben ignoriert.
+C:\DHBW_Informationstechnik_2022\C++\Abschlussprojekt\6Nimmt\6_Nimmt_Klassen\Bot.h(5,1): error C2503: "Spieler": Basisklasse kann keine Arrays der Größe Null enthalten
+C:\DHBW_Informationstechnik_2022\C++\Abschlussprojekt\6Nimmt\6_Nimmt_Klassen\Mensch.h(5,1): error C2503: "Spieler": Basisklasse kann keine Arrays der Größe Null enthalten
