@@ -12,9 +12,7 @@ public:
 	Karte(int strfpnkt, int z);
 
 	void zeigen(int x, int y, bool verdeckt = false);
-
-	int myNum;
-	std::string myString;
+	int GetZahl();
 
 private:
 	int strafpunkte;

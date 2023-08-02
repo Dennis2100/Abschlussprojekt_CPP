@@ -4,5 +4,9 @@
 class Bot : public Spieler
 {
 
+public: 
+	Bot();
+
+	Karte MachZug();
 };
 

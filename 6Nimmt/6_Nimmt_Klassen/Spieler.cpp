@@ -4,8 +4,7 @@
 
 Spieler::Spieler()
 {
-	int punktestand = 0;
-	Karte handkarten[10]{};
+	
 }
 
 void Spieler::SetPunktestand(int punktestand)
@@ -16,4 +15,35 @@ void Spieler::SetPunktestand(int punktestand)
 int Spieler::GetPunktestand()
 {
 	return punktestand;
+}
+
+void Spieler::SetHandkarteBeiIndex(int index, Karte karte)
+{
+	handkarten[index] = karte;
+}
+
+Karte Spieler::LegeHandkarte(int index)
+{
+	Karte rueckgabe;
+
+	rueckgabe = handkarten[index];
+	LöscheGelegteHandkarte(index);
+
+	return rueckgabe;
+}
+
+void Spieler::LöscheGelegteHandkarte(int index)
+{
+	Karte zwischenspeicher;
+
+	zwischenspeicher = handkarten[index];
+	handkarten[index] = handkarten[längeHandkartenIndex];
+	handkarten[längeHandkartenIndex] = zwischenspeicher;
+
+	längeHandkartenIndex--;
+}
+
+int Spieler::GetHandkartenIndexLaenge()
+{
+	return längeHandkartenIndex;
 }

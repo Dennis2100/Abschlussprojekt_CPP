@@ -10,15 +10,15 @@
 
 Steuerung::Steuerung()
 {
-
 }
 
 void Steuerung::StarteSpiel()
 {
 	UI ui;
 	int botAbfrage;
-	Spielfeld *spielfeld = new Spielfeld();
-	Deck *deck = new Deck();
+	int eingabeMensch;
+	Spielfeld * spielfeld = new Spielfeld();
+	Deck * deck = new Deck();
 
 	Mensch *mensch = new Mensch();
 	Bot *bot = new Bot();
@@ -43,28 +43,34 @@ void Steuerung::StarteSpiel()
 			break;
 	}
 
-	ErstenVier(*spielfeld, *deck);
-	GebenHandkarten(*deck, *bot, *mensch);
+	ErstenVier(spielfeld, deck);
+	GebenHandkarten(deck, bot, mensch);
 
-	ui.AusgabeSpielfeld();
+	ui.AusgabeSpielfeld(spielfeld);
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 10; i++)										//Ablauf des Spiels á 10 Runden
 	{
+		ui.AusgabeHandkarten(mensch);
+
+		do																//Abfangen von Falschen Einträgen
+		{
+			eingabeMensch = ui.EingabeKarte();
+		} while (PrüfeEingabe(eingabeMensch, mensch));
+
+		mensch->LegeHandkarte(eingabeMensch);							//Mensch legt eine Karte
+		bot->MachZug();													//Bot legt eine Karte
 
 	}
 
-	/*if ()
-	{
-
-	}
-	else
-	{
-
-	}*/
+	ui.SiegerEhrung(bot, mensch);										//Gewinner wird ermittelt
 }
 
-bool Steuerung::PrüfeEingabe()											//Prüfe ob der Eingegebene Index der Handkarten korrekt ist
+bool Steuerung::PrüfeEingabe(int auswahl, Mensch * mensch)				//Prüfe ob der Eingegebene Index der Handkarten korrekt ist
 {
+	bool rueckgabe = false;
+
+	if (auswahl > mensch->GetHandkartenIndexLaenge() || auswahl < 0) return true;
+
 	return false;
 }
 
@@ -78,20 +84,24 @@ void Steuerung::SechsNimmt()											//Falls 6 Karten in einer Reihe sind, nim
 
 }
 
-void Steuerung::GebenHandkarten(Deck deck, Bot bot, Mensch mensch)		//Verteilen der Handkarten
+void Steuerung::GebenHandkarten(Deck * deck, Bot * bot, Mensch * mensch)		//Verteilen der Handkarten
 {
-
-}
-
-void Steuerung::ErstenVier(Spielfeld spielfeld, Deck deck)				//Einsetzen der ersten 4 Karten auf das Spielfeld
-{
-	for(int i = 0; i < 4; i++)
+	for (int i = 0; i < 10; i++)
 	{
-		spielfeld.SetSpielfeld(1, i, deck.Dealer());
+		bot->SetHandkarteBeiIndex(i, deck->Dealer());
+		mensch->SetHandkarteBeiIndex(i, deck->Dealer());
 	}
 }
 
-void Steuerung::PrüfenGelegteKarte()									//Prüfen der gelegten Karte ob sie kleiner ist als di Karten in der 4. Reihe
+void Steuerung::ErstenVier(Spielfeld * spielfeld, Deck  * deck)				//Einsetzen der ersten 4 Karten auf das Spielfeld
 {
-
+	for(int i = 0; i < 4; i++)
+	{
+		spielfeld->SetSpielfeld(0, i, deck->Dealer());
+	}
 }
+
+//bool Steuerung::PruefenAusgewaehlteKarte(int auswahl)					//Prüfen der gelegten Karte ob sie kleiner ist als die Karten in der 4 Reihen
+//{
+//
+//}

@@ -3,5 +3,10 @@
 
 class Mensch : public Spieler
 {
+
+public :
+	Mensch();
+
+	Karte GetHandkarteBeiIndex(int index);
 };
 

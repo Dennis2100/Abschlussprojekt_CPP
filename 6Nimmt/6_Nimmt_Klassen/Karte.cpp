@@ -4,7 +4,7 @@
 
 Karte::Karte()
 {
-	strafpunkte = 0;
+	strafpunkte = 1;
 	zahl = 0;
 }
 
@@ -22,6 +22,7 @@ void Karte::zeigen(int x, int y, bool verdeckt)
     int x_kopf;
     int y_kopf;
 
+    if (zahl == 0) return;
 
     zeigen_linie(x, y, 43, 45, 43);
 
@@ -70,6 +71,11 @@ void Karte::zeigen(int x, int y, bool verdeckt)
     SetCursorPosition(x_kopf, y_kopf++); printf("/_  _\\");
     SetCursorPosition(x_kopf, y_kopf++); printf("  ||");
     SetCursorPosition(x_kopf, y_kopf);   printf(" (__)");
+}
+
+int Karte::GetZahl()
+{
+    return zahl;
 }
 
 void Karte::zeigen_linie(int xl, int yl, char char1, char char2, char char3)

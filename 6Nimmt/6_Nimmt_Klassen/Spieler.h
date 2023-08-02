@@ -3,14 +3,20 @@
 
 class Spieler
 {
-	int punktestand;
-	Karte handkarten[];
+	int punktestand = 0;
+	int längeHandkartenIndex = 9;
 
 public:
 	Spieler();
 
 	void SetPunktestand(int punktestand);
 	int GetPunktestand();
-	Karte SetzeKarte();
+	void SetHandkarteBeiIndex(int index, Karte karte);
+	Karte LegeHandkarte(int index);
+	void LöscheGelegteHandkarte(int index);
+	int GetHandkartenIndexLaenge();
+
+protected:
+	Karte handkarten[10];
 };
 
