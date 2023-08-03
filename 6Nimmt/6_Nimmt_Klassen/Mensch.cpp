@@ -4,7 +4,7 @@
 
 Mensch::Mensch()
 {
-
+	name = "Mensch";
 }
 
 Karte Mensch::MachZug()

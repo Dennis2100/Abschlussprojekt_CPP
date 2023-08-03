@@ -144,6 +144,7 @@
     <ClInclude Include="Bot.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="HighCardBot.h" />
     <ClInclude Include="Karte.h" />
     <ClInclude Include="KonsolenOperation.h" />
     <ClInclude Include="LowCardBot.h" />
@@ -160,6 +161,7 @@
     <ClCompile Include="6_Nimmt_Klassen.cpp" />
     <ClCompile Include="Bot.cpp" />
     <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="HighCardBot.cpp" />
     <ClCompile Include="Karte.cpp" />
     <ClCompile Include="KonsolenOperation.cpp" />
     <ClCompile Include="LowCardBot.cpp" />

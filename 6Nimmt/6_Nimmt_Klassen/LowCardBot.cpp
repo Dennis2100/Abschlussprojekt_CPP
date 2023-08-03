@@ -3,13 +3,12 @@
 
 LowCardBot::LowCardBot()
 {
+    name = "LowCardBot";
 }
 
 Karte LowCardBot::MachZug()
 {
-    return Karte();
-}
+    SetGesetzteKarte(handkarten[0]);
 
-void LowCardBot::AusgewaehlteReiheNehmen(Spielfeld* spielfeld)
-{
+    return LegeHandkarte(0);
 }

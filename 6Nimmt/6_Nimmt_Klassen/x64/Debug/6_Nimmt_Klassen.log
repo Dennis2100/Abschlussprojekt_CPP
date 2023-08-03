@@ -1,4 +1,5 @@
 ﻿  Bot.cpp
+  HighCardBot.cpp
   LowCardBot.cpp
   Mensch.cpp
   SchlauerBot.cpp

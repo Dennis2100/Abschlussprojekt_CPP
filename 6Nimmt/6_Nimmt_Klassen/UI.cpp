@@ -13,8 +13,6 @@ UI::UI()
 
 void UI::AusgabeSpielfeld(Spielfeld * spielfeld)			//Aktuelles Spielfeld ausgeben
 {
-	//int platzhalter;
-
 	//system("MODE CON COLS=210 LINES=60");
 	system("mode con COLS=700");
 	system("cls");
@@ -28,16 +26,14 @@ void UI::AusgabeSpielfeld(Spielfeld * spielfeld)			//Aktuelles Spielfeld ausgebe
 			spielfeld->GetSpielfeld(i, c).zeichnen(c * 18, i*9);
 		}
 	}
-
-	//std::cin >> platzhalter;
 }
 
 int UI::AbfrageBot()				//Frage welcher Bot verwendet werden soll
 {
 	int eingabe = 0;
 
-	std::cout << "1 : Schlauer Bot\n2 : Zufalls Bot\n3 : LowCardBot\n\n";
-	std::cout << "Bitte geben Sie den gewählten Bot ein: ";
+	std::cout << "1 : Schlauer Bot\n2 : Zufalls Bot\n3 : LowCardBot\n4 : HighCardBot\n\n";
+	std::cout << "Bitte geben Sie den gewaehlten Bot ein: ";
 	std::cin >> eingabe;
 
 	std::cout << "\n";
@@ -59,21 +55,21 @@ int UI::EingabeKarte()				//Auswahl der zu legenden Karte für den Menschspieler
 
 	SetCursorPosition(1, 53);
 
-	std::cout << "Wählen Sie einen Index um die gewünschte Karte zu legen: ";
+	std::cout << "Waehlen Sie eine Zahl um die gewuenschte Karte zu legen: ";
 	std::cin >> eingabe;
 
 	return eingabe;
 }
 
-void UI::SiegerEhrung(Spieler * bot, Spieler * mensch)		//Ermittlung des Gewinners
+void UI::SiegerEhrung(Spieler * spieler1, Spieler * spieler2)		//Ermittlung des Gewinners
 {
-	if (mensch->GetPunktestand() < bot->GetPunktestand())
+	if (spieler1->GetPunktestand() < spieler2->GetPunktestand())
 	{
-		std::cout << "Sie haben Gewonnen!";
+		std::cout << spieler1->GetName() << "hat Gewonnen!";
 	}
-	else if(mensch->GetPunktestand() > bot->GetPunktestand())
+	else if(spieler1->GetPunktestand() > spieler2->GetPunktestand())
 	{
-		std::cout << "Der Bot hat Gewonnen!";
+		std::cout << spieler2->GetName() << "hat Gewonnen!";
 	}
 	else
 	{

@@ -10,7 +10,7 @@
 #include "SchlauerBot.h"
 #include "ZufallsBot.h"
 #include "LowCardBot.h"
-
+#include "HighCardBot.h"
 #include <cstdlib>
 
 Steuerung::Steuerung()
@@ -48,7 +48,10 @@ void Steuerung::StarteSpiel()
 	Karte gewaelteKarte2;
 
 	ErstenVier(spielfeld, deck);
+
 	GebenHandkarten(deck, spieler1, spieler2);
+	spieler1->SortierenHandkarten();
+	spieler2->SortierenHandkarten();
 
 	for (int i = 0; i < 10; i++)										//Ablauf des Spiels á 10 Runden
 	{
@@ -133,17 +136,8 @@ void Steuerung::StarteSpiel()
 		}
 	}
 
-	//ui.SiegerEhrung(bot, mensch);										//Gewinner wird ermittelt
+	ui.SiegerEhrung(spieler1, spieler2);										//Gewinner wird ermittelt
 }
-
-//void Steuerung::SechsNimmt(Spieler * spieler, Spielfeld* spielfeld)			//Falls 6 Karten in einer Reihe sind, nimmt derjenige der die 6. Karte gelegt hat
-//{
-//	int index = 0;
-//
-//
-//
-//	ReiheNimmt(index, spieler, spielfeld);
-//}
 
 void Steuerung::GebenHandkarten(Deck * deck, Spieler * spieler1, Spieler * spieler2)	//Verteilen der Handkarten
 {
@@ -162,37 +156,6 @@ void Steuerung::ErstenVier(Spielfeld * spielfeld, Deck  * deck)			//Einsetzen de
 	}
 }
 
-//void Steuerung::AusgewaehlteReiheNehmen(Spieler* spieler, Spielfeld* spielfeld)
-//{
-//	int eingabe;
-//	UI ui;
-//
-//	do
-//	{
-//		eingabe = ui.AuswahlReiheNehmen();
-//	} while (eingabe < 1 && eingabe > 4);
-//
-//	ReiheNimmt(eingabe, spieler, spielfeld);
-//}
-//
-//void Steuerung::ReiheNimmt(int spalte, Spieler * spieler, Spielfeld * spielfeld)
-//{
-//	int strafpunkte = 0;
-//	Karte platzhalter;
-//
-//	for (int i = 0; i < 5; i++)
-//	{
-//		strafpunkte += spielfeld->GetSpielfeld(i, spalte).getStrafpunkte();
-//		spielfeld->SetSpielfeld(i, spalte, platzhalter);
-//	}
-//
-//	spielfeld->SetSpielfeld(5, spalte, platzhalter);
-//
-//	spielfeld->SetSpielfeld(0, spalte, spieler->GetGesetzteKarte());
-//
-//	spieler->SetPunktestand(strafpunkte);
-//}
-
 void Steuerung::BotWahl(Spieler * bot, UI ui)
 {
 	int botAbfrage;
@@ -200,20 +163,23 @@ void Steuerung::BotWahl(Spieler * bot, UI ui)
 	do																	//Bot Auswahl
 	{
 		botAbfrage = ui.AbfrageBot();
-	} while (botAbfrage != 1 && botAbfrage != 2 && botAbfrage != 3);
+	} while (!(botAbfrage <= 4 && botAbfrage >= 1));
 
-	switch (botAbfrage)
+	switch (botAbfrage)													//Zuweisung des Ausgewählten Bots
 	{
-	case 1:
-		bot = new SchlauerBot();
-		break;
+		case 1:
+			bot = new SchlauerBot();
+			break;
 
-	case 2:
-		bot = new ZufallsBot();
-		break;
+		case 2:
+			bot = new ZufallsBot();
+			break;
 
-	case 3:
-		bot = new LowCardBot();
-		break;
+		case 3:
+			bot = new LowCardBot();
+			break;
+
+		case 4:
+			bot = new HighCardBot();
 	}
 }

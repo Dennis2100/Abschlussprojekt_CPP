@@ -8,6 +8,5 @@ public:
 	LowCardBot();
 
 	Karte MachZug() override;
-	void AusgewaehlteReiheNehmen(Spielfeld* spielfeld) override;
 };
 

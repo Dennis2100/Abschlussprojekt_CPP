@@ -10,11 +10,11 @@ class Spielfeld
 
 public:
 
-	Spielfeld();
+	Spielfeld();												//Standart-Konstruktor
 
-	Karte GetSpielfeld(int reihe, int spalte);
-	void SetSpielfeld(int reihe, int spalte, Karte karte);
-	int KarteLegen(Karte karte);
-	int GetKartenAnzahl(int reihe);
+	Karte GetSpielfeld(int reihe, int spalte);					//Gibt die Karte an der angegebenen Reihe und Spalte zurück 
+	void SetSpielfeld(int reihe, int spalte, Karte karte);		//Setzt das Spielfeld an der angegebenen Reihe und Spalte
+	int KarteLegen(Karte karte);								//Karte wird gelegt mit einem int als Rückgabe, Beschreibung in der .cpp
+	int GetKartenAnzahl(int reihe);								//Gibt die anzahl der Karten einer Reihe an
 };
 

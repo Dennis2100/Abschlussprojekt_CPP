@@ -81,6 +81,9 @@
     <ClInclude Include="LowCardBot.h">
       <Filter>Headerdateien\Spieler\Bots</Filter>
     </ClInclude>
+    <ClInclude Include="HighCardBot.h">
+      <Filter>Headerdateien\Spieler\Bots</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Steuerung.cpp">
@@ -123,6 +126,9 @@
       <Filter>Quelldateien\Deck</Filter>
     </ClCompile>
     <ClCompile Include="LowCardBot.cpp">
+      <Filter>Quelldateien\Spieler\Bots</Filter>
+    </ClCompile>
+    <ClCompile Include="HighCardBot.cpp">
       <Filter>Quelldateien\Spieler\Bots</Filter>
     </ClCompile>
   </ItemGroup>

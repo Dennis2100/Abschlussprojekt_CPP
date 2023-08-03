@@ -6,10 +6,10 @@ class Deck
 	int deckLänge;
 
 public:
-	Deck();
+	Deck();										//Standart-Konstruktor
 
-	Karte Dealer();
-	int ErmittlungStrafpunkte(int zahl);
-	void KarteAusDeckLöschen(int index);
+	Karte Dealer();								//Gibt eine Zufällige Karte aus den noch vorhandenen Karten im Deck zurück
+	//int ErmittlungStrafpunkte(int zahl);
+	void KarteAusDeckLöschen(int index);		//Löscht eine Karte aus dem Deck
 };
 

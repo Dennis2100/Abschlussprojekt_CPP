@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Spieler.h"
-
+#include <iostream>
 
 Spieler::Spieler()
 {
@@ -24,10 +24,10 @@ void Spieler::SetHandkarteBeiIndex(int index, Karte karte)
 
 Karte Spieler::LegeHandkarte(int index)
 {
-	Karte rueckgabe;
-
-	rueckgabe = handkarten[index];
+	Karte rueckgabe = handkarten[index];
 	LöscheGelegteHandkarte(index);
+
+	SortierenHandkarten();
 
 	return rueckgabe;
 }
@@ -63,6 +63,11 @@ Karte Spieler::GetGesetzteKarte()
 	return gesetzteKarte;
 }
 
+std::string Spieler::GetName()
+{
+	return name;
+}
+
 void Spieler::ReiheNimmt(int spalte, Spielfeld* spielfeld)
 {
 	int strafpunkte = 0;
@@ -79,4 +84,57 @@ void Spieler::ReiheNimmt(int spalte, Spielfeld* spielfeld)
 	spielfeld->SetSpielfeld(0, spalte, gesetzteKarte);
 
 	punktestand = strafpunkte;
+}
+
+void Spieler::SortierenHandkarten()
+{
+	HeapSort();
+}
+
+void Spieler::HeapSort()
+{
+	for (int i = längeHandkartenIndex / 2 -1; i >= 0; i--)
+	{
+		Heapify(längeHandkartenIndex, i);
+	}
+
+	for (int i = längeHandkartenIndex - 1; i >= 0; i--)
+	{
+		SwapHandkarten(0, i);
+
+		Heapify(i, 0);
+	}
+}
+
+void Spieler::Heapify(int index, int root)
+{
+	int largest = root;
+	int l = 2 * root + 1;
+	int r = 2 * root + 2;
+
+	if (l < index && handkarten[l].getZahl() > handkarten[largest].getZahl())
+	{
+		largest = l;
+	}
+
+	if (r < index && handkarten[r].getZahl() > handkarten[largest].getZahl())
+	{
+		largest = r;
+	}
+
+	if (largest != root)
+	{
+		SwapHandkarten(root, largest);
+
+		Heapify(index, largest);
+	}
+}
+
+void Spieler::SwapHandkarten(int index1, int index2)
+{
+	Karte zwischenspeicher;
+
+	zwischenspeicher = handkarten[index1];
+	handkarten[index1] = handkarten[index2];
+	handkarten[index2] = zwischenspeicher;
 }

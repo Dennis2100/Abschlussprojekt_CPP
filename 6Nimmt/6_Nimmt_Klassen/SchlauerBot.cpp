@@ -3,6 +3,7 @@
 
 SchlauerBot::SchlauerBot()
 {
+    name = "Schlauerbot";
 }
 
 Karte SchlauerBot::MachZug()
