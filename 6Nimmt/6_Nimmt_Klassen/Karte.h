@@ -3,26 +3,30 @@
 #include <iostream>
 #include <string.h>
 
-class Karte
-{
-	
+class Karte {
 
 public:
-	Karte();
-	Karte(int strfpnkt, int z);
+	Karte(void);
+	Karte(int zahl);
+	~Karte();
 
-	void zeigen(int x, int y, bool verdeckt = false);
-	int GetZahl();
+	void zeichnen(int x, int y, bool verdeckt = false);
+	int getZahl();
+	int getStrafpunkte();
 
 private:
 	int strafpunkte;
 	int zahl;
 
-	static const int karte_breite = 16;
-	static const int karte_hoehe = 11;
+	static int karte_index;
 
-	const static int colors[];
+	static const int Karte_breite = 15;
+	static const int Karte_hoehe = 10;
 
-	void zeigen_linie(int xl, int yl, char char1, char char2, char char3);
+	const static int farben[];
+
+	void zeichnen_linie(int xl, int yl, char char1, char char2, char char3, int wiederholen);
+	void zeichne_kopf(int xk, int yk);
+	void zeichnen_kartennummer(int xm1, int ym1);
+	void zeichnen_strafpunkte(int x, int y, int punkte);
 };
-

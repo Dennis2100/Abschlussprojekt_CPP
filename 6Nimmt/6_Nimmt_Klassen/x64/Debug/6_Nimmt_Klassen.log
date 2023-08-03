@@ -1,2 +1,10 @@
-﻿  Deck.cpp
+﻿  Bot.cpp
+  LowCardBot.cpp
+  Mensch.cpp
+  SchlauerBot.cpp
+  Spieler.cpp
+  Steuerung.cpp
+  UI.cpp
+  ZufallsBot.cpp
+  Code wird generiert...
   6_Nimmt_Klassen.vcxproj -> C:\DHBW_Informationstechnik_2022\C++\Abschlussprojekt\6Nimmt\x64\Debug\6_Nimmt_Klassen.lib

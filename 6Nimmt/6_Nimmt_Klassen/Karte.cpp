@@ -2,86 +2,138 @@
 #include "Karte.h"
 #include "KonsolenOperation.h"
 
-Karte::Karte()
+const int Karte::farben[] = { 15,03,06,4, 02, 5, 4 };
+
+Karte::Karte(void)
 {
-	strafpunkte = 1;
-	zahl = 0;
+    strafpunkte = 0;
+    zahl = 0;
 }
 
-Karte::Karte(int strfpnkt, int z)
+Karte::Karte(int z)
 {
-	strafpunkte = strfpnkt;
-	zahl = z;
-}
-
-const int Karte::colors[] = {15, 03, 06, 4, 02, 5, 4};
-
-void Karte::zeigen(int x, int y, bool verdeckt)
-{
-    int straf_linies;
-    int x_kopf;
-    int y_kopf;
-
-    if (zahl == 0) return;
-
-    zeigen_linie(x, y, 43, 45, 43);
-
-    for (int j = 1; j < karte_hoehe - 2; j++)
+    if (z == 55)
     {
-        zeigen_linie(x, y + j, 124, 32, 124);
+        strafpunkte = 7;
+    }
+    else if (z % 10 == 0)
+    {
+        strafpunkte = 3;
+    }
+    else if (z % 10 == 5)
+    {
+        strafpunkte = 2;
+    }
+    else if (z % 11 == 0)
+    {
+        strafpunkte = 5;
+    }
+    else
+    {
+        strafpunkte = 1;
     }
 
-    zeigen_linie(x, y + karte_hoehe - 2, 43, 45, 43);
-
-    /* druck die Karte. Falls sie verdeckt ist, werden die Nummern und die Strafpunkte nicht ausgegeben */
-    if (/*not*/!verdeckt)
-    {
-        SetCursorPosition(x + 1, y + 1);
-        printf("%d", zahl);
-
-        SetCursorPosition(x + karte_breite - 4, y + 1);
-        printf("%3d", zahl);
-
-        SetCursorPosition(x + 1, y + karte_hoehe - 3);
-        printf("%d", zahl);
-
-        SetCursorPosition(x + karte_breite - 4, y + karte_hoehe - 3);
-        printf("%3d", zahl);
-
-        SetTextColor(colors[strafpunkte - 1]);
-        straf_linies = strafpunkte / 4 + 1; //ab 4 Strafpunkte zeichnet man in zwei Zeilen
-        for (int k = 0; k < straf_linies; k++)
-        {
-            int l = strafpunkte / straf_linies + (1 - k) * (straf_linies / 2) * (strafpunkte % 2);
-            int m = x + karte_breite / 2 - l + 1;
-            for (int n = 0; n < l;n++)
-            {
-                SetCursorPosition(m, y + 1 + k);
-                printf("*");
-                m += 2;
-            }
-        }
-        SetTextColor(15);
-    }
-
-    x_kopf = x + karte_breite / 2 - 3;
-    y_kopf = y + karte_hoehe / 2 - 1;
-
-    /* druck den Ochsenkopf */
-    SetCursorPosition(x_kopf, y_kopf++); printf("/_  _\\");
-    SetCursorPosition(x_kopf, y_kopf++); printf("  ||");
-    SetCursorPosition(x_kopf, y_kopf);   printf(" (__)");
+    zahl = z;
 }
 
-int Karte::GetZahl()
+Karte::~Karte()
+{
+}
+
+int Karte::getZahl()
 {
     return zahl;
 }
 
-void Karte::zeigen_linie(int xl, int yl, char char1, char char2, char char3)
+int Karte::getStrafpunkte()
 {
-    SetCursorPosition(xl, yl);
-    printf("%c", char1);
-    for (int i = 0; i < karte_breite - 2; i++) printf("%c", char2);
-    printf("%c", char3);
+    return strafpunkte;
+}
+
+/* die Methode zeichnet die Karte an der angegebenen Koordinaten */
+void Karte::zeichnen(int x, int y, bool verdeckt)
+{
+    /* Setzten die Basisfarbe */
+    SetTextColor(farben[0]);
+
+    /* Zeichne die Umrisse von Karte */
+    zeichnen_linie(x, y, 43, 45, 43, 1);
+    zeichnen_linie(x, y + 1, 124, 32, 124, Karte_hoehe - 3);
+    zeichnen_linie(x, y + Karte_hoehe - 2, 43, 45, 43, 1);
+
+    /* Falls sie verdeckt ist, werden die Nummern und die Strafpunkte nicht ausgegeben */
+    if (!verdeckt)
+    {
+        /* Nummern aud der Karte in alle vier Ecken ausgeben */
+        zeichnen_kartennummer(x, y);
+
+        /* Strafpunkte auf der Karte ausgeben */
+        zeichnen_strafpunkte(x, y, strafpunkte);
+    }
+
+    /* zeichne den Ochsenkopf */
+    zeichne_kopf(x + Karte_breite / 2 - 3, y + Karte_hoehe / 2 - 1);
+}
+
+void Karte::zeichnen_linie(int xl, int yl, char char1, char char2, char char3, int wiederholen)
+{
+    for (int j = 0; j < wiederholen; j++)
+    {
+        SetCursorPosition(xl, yl + j);
+        printf("%c", char1);
+        for (int i = 0; i < Karte_breite - 2; i++) printf("%c", char2);
+        printf("%c", char3);
+    }
+}
+
+void Karte::zeichne_kopf(int xk, int yk)
+{
+    SetCursorPosition(xk, yk++); printf("/_  _\\");
+    SetCursorPosition(xk, yk++); printf("  ||");
+    SetCursorPosition(xk, yk);   printf(" (__)");
+}
+
+void Karte::zeichnen_kartennummer(int xm1, int ym1)
+{
+    int xm2;
+    int ym2;
+
+    xm1++;
+    xm2 = xm1 + Karte_breite - 5;
+    ym1++;
+    ym2 = ym1 + Karte_hoehe - 4;
+
+    SetCursorPosition(xm1, ym1);
+    printf("%d", zahl);
+
+    SetCursorPosition(xm2, ym1);
+    printf("%3d", zahl);
+
+    SetCursorPosition(xm1, ym2);
+    printf("%d", zahl);
+
+    SetCursorPosition(xm2, ym2);
+    printf("%3d", zahl);
+}
+
+void Karte::zeichnen_strafpunkte(int xp, int yp, int punkte)
+{
+    int straf_linies;
+
+    SetTextColor(farben[punkte - 1]);
+
+    straf_linies = punkte / 4 + 1; //ab 4 Strafpunkte zeichnet man in zwei Zeilen
+    for (int k = 0; k < straf_linies; k++)
+    {
+        /* Berechnung der Position, damit die Strafpunkte symmetrisch in der Mitte platziert sind */
+        int l = punkte / straf_linies + (1 - k) * (straf_linies / 2) * (punkte % 2);
+        int m = xp + Karte_breite / 2 - l + 1;
+        for (int n = 0; n < l;n++)
+        {
+            SetCursorPosition(m, yp + 1 + k);
+            printf("*");
+            m += 2;
+        }
+    }
+    SetTextColor(farben[0]);
 }

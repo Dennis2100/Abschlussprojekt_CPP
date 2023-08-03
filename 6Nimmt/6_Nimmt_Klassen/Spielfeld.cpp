@@ -17,6 +17,12 @@ void Spielfeld::SetSpielfeld(int reihe, int spalte, Karte karte)
 	spielfeld[reihe][spalte] = karte;
 }
 
+/* die Methode plaziert eine Karte auf dem Spielfeld
+   Rueckgabe Werte:
+	 0 - die Karte angenommen, keine interaktion erforderlich
+	 1 - die Karte ist kleiner als die letzten Karten in allen Reihen, es muss gewählt werden welche Reihe wird genommen
+	 2 - die Karte angenommen, dabei wurden 5 anderen Karten von der entsprechende Reihe kassiert */
+
 int Spielfeld::KarteLegen(Karte karte)
 {
 	int diff = max_diff;
@@ -37,9 +43,9 @@ int Spielfeld::KarteLegen(Karte karte)
 			Karte tmp_karte;
 			tmp_karte = spielfeld[i][kartenzahl[i] - 1];
 
-			if (karte.GetZahl() > tmp_karte.GetZahl())
+			if (karte.getZahl() > tmp_karte.getZahl())
 			{
-				tmp_diff = karte.GetZahl() - tmp_karte.GetZahl();
+				tmp_diff = karte.getZahl() - tmp_karte.getZahl();
 				if (tmp_diff < diff)
 				{
 					tmp_diff = diff;

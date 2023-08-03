@@ -146,6 +146,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Karte.h" />
     <ClInclude Include="KonsolenOperation.h" />
+    <ClInclude Include="LowCardBot.h" />
     <ClInclude Include="Mensch.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="SchlauerBot.h" />
@@ -161,6 +162,7 @@
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="Karte.cpp" />
     <ClCompile Include="KonsolenOperation.cpp" />
+    <ClCompile Include="LowCardBot.cpp" />
     <ClCompile Include="Mensch.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

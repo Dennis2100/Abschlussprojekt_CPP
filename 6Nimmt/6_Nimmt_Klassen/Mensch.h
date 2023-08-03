@@ -7,6 +7,8 @@ class Mensch : public Spieler
 public :
 	Mensch();
 
-	Karte GetHandkarteBeiIndex(int index);
+	Karte MachZug() override;
+	bool PruefeEingabe(int auswahl);
+	void AusgewaehlteReiheNehmen(Spielfeld* spielfeld) override;
 };
 

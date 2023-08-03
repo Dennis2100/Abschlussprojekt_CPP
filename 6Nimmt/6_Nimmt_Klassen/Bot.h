@@ -7,6 +7,7 @@ class Bot : public Spieler
 public: 
 	Bot();
 
-	Karte MachZug();
+	virtual Karte MachZug() override;
+	virtual void AusgewaehlteReiheNehmen(Spielfeld* spielfeld) override;
 };
 
