@@ -1,5 +1,6 @@
 #pragma once
 #include "Bot.h"
+#include "Spielfeld.h"
 
 class SchlauerBot : public Bot
 {
@@ -7,6 +8,6 @@ class SchlauerBot : public Bot
 public:
 	SchlauerBot();
 
-	Karte MachZug() override;
+	Karte MachZug(Spielfeld * spielfeld) override;
 };
 

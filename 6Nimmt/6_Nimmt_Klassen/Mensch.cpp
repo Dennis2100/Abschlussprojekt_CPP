@@ -1,13 +1,14 @@
 #include "pch.h"
 #include "Mensch.h"
 #include "UI.h"
+#include "Spielfeld.h"
 
 Mensch::Mensch()
 {
 	name = "Mensch";
 }
 
-Karte Mensch::MachZug()
+Karte Mensch::MachZug(Spielfeld * spielfeld)
 {
 	UI ui;
 	int eingabe;

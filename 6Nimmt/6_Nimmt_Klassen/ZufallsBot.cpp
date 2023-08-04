@@ -1,12 +1,13 @@
 #include "pch.h"
 #include "ZufallsBot.h"
+#include "Spielfeld.h"
 
 ZufallsBot::ZufallsBot()
 {
 	name = "Zufallsbot";
 }
 
-Karte ZufallsBot::MachZug()
+Karte ZufallsBot::MachZug(Spielfeld * spielfeld)
 {
 	srand((unsigned int)time(NULL));
 	int random = rand() % längeHandkartenIndex; //0 bis längeHandkartenIndex-1

@@ -28,7 +28,7 @@ public:
 	void Heapify(int index, int root);											//	Gewähltes Sortierverfahren, da komplexität immer gleich
 	void SwapHandkarten(int index1, int index2);								//
 
-	virtual Karte MachZug() abstract;											//Spieler macht einen Zug	
+	virtual Karte MachZug(Spielfeld * spielfeld) abstract;						//Spieler macht einen Zug	
 	virtual void AusgewaehlteReiheNehmen(Spielfeld * spielfeld) abstract;		//Nimmt die Ausgewählte Reihe, berechnet Strafpunkte, Setzt ertse Karte der Spalte
 
 protected:
