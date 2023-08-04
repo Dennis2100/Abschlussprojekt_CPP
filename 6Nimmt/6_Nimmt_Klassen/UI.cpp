@@ -70,6 +70,8 @@ void UI::AusgabeHandkarten(Karte * handkarten, int längeHandkartenIndex, int gew
 	{
 		handkarten[i].zeichnen(15 + i * 14, 34,(i == gewaehlteKarte));
 	}
+
+	std::cout << "\n";
 }
 
 int UI::EingabeKarte(Karte* handkarten, int längeHandkartenIndex)				//Auswahl der zu legenden Karte für den Menschspieler
@@ -79,7 +81,7 @@ int UI::EingabeKarte(Karte* handkarten, int längeHandkartenIndex)				//Auswahl d
 	int gewaehlteKarte = 0;
 
 	SetCursorPosition(1, 32);
-    std::cout << "                                 Waehlen Sie eine Zahl um die gewuenschte Karte zu legen:                      ";
+    std::cout << "                                 Waehlen Sie mit den Pfeiltasten eine Karte zum legen:                      ";
 	
 	while (endlos)
 	{
@@ -106,20 +108,23 @@ int UI::EingabeKarte(Karte* handkarten, int längeHandkartenIndex)				//Auswahl d
 	return gewaehlteKarte;
 }
 
-void UI::SiegerEhrung(Spieler * spieler1, Spieler * spieler2)		//Ermittlung des Gewinners
+int UI::SiegerEhrung(Spieler * spieler1, Spieler * spieler2)		//Ermittlung des Gewinners
 {
 	SetCursorPosition(1, 32);
 	if (spieler1->GetPunktestand() < spieler2->GetPunktestand())
 	{
 		std::cout << spieler1->GetName() << " hat Gewonnen!";
+		return 1;
 	}
 	else if(spieler1->GetPunktestand() > spieler2->GetPunktestand())
 	{
 		std::cout << spieler2->GetName() << " hat Gewonnen!";
+		return 2;
 	}
 	else
 	{
 		std::cout << "Es ist ein unentschieden!";
+		return 0;
 	}
 }
 

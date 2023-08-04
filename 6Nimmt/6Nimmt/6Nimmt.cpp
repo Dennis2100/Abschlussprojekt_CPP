@@ -3,19 +3,24 @@
 #include <string.h>
 #include "Steuerung.h"
 #include "Karte.h"
+#include "UI.h"
 
 int main()
 {
     
     Steuerung steuerung;
-    steuerung.StarteSpiel();
+    UI ui;
 
-    /*Karte karte(7, 55);
-    karte.zeigen(0,0);
-    for (int i = 0; i < 15; i++)
+    int istSpielerMensch = ui.IstSpielerMensch();
+    int botWahl1 = ui.AbfrageBot();
+    int botWahl2 = 0;
+
+    if (istSpielerMensch == 0)
     {
-        std::cout << "\n";
-    }*/
+        botWahl2 = ui.AbfrageBot();
+    }
+
+    steuerung.StarteSpiel(istSpielerMensch, botWahl1, botWahl2);
 
     return 0;
 }

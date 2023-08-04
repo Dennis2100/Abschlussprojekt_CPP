@@ -17,7 +17,7 @@ Steuerung::Steuerung()
 {
 }
 
-void Steuerung::StarteSpiel()
+int Steuerung::StarteSpiel(int istSpielerMensch, int botWahl1, int botWahl2)
 {
 	UI ui;
 	Spielfeld * spielfeld = new Spielfeld();
@@ -27,28 +27,18 @@ void Steuerung::StarteSpiel()
 	Spieler * spieler2 = NULL;
 
 	system("MODE CON COLS=200 LINES=200");
-	
-	if (ui.IstSpielerMensch() == 1)
+
+	if (istSpielerMensch == 1)
 	{
 		spieler1 = new Mensch();
 
-		spieler2 = BotWahl(ui);
-		//BotWahl(spieler2, ui);
+		spieler2 = BotWahl(botWahl1);
 	}
 	else
 	{
-		spieler1 = BotWahl(ui);
-		spieler2 = BotWahl(ui);
-
-		//BotWahl(spieler1, ui);
-		//BotWahl(spieler2, ui);
+		spieler1 = BotWahl(botWahl1);
+		spieler2 = BotWahl(botWahl2);
 	}
-	
-	//spieler1 = new Mensch();
-	//spieler2 = new ZufallsBot();
-	//spieler2 = new LowCardBot();
-	//spieler2 = new HighCardBot();
-	//spieler2 = new SchlauerBot();
 
 	Karte gewaelteKarte1;												//Gewählte Karte von Spieler1
 	Karte gewaelteKarte2;												//Gewählte Karte von Spieler2
@@ -79,7 +69,7 @@ void Steuerung::StarteSpiel()
 	ui.AusgabeSpielfeld(spielfeld,5);
 	ui.SpielerStand(spieler1, spieler2);
 
-	ui.SiegerEhrung(spieler1, spieler2);								//Gewinner wird ermittelt
+	return ui.SiegerEhrung(spieler1, spieler2);								//Gewinner wird ermittelt
 	std::cin.get();
 }
 
@@ -99,38 +89,6 @@ void Steuerung::ErstenVier(Spielfeld * spielfeld, Deck  * deck)							//Einsetze
 		spielfeld->KarteLegen(deck->Dealer());
 	}
 }
-
-//void Steuerung::BotWahl(Spieler * spieler, UI ui)
-//{
-//	int botAbfrage;
-//
-//	do																					//Bot Auswahl
-//	{
-//		botAbfrage = ui.AbfrageBot();
-//	} while (!(botAbfrage <= 4 && botAbfrage >= 1));
-//
-//	switch (botAbfrage)																	//Zuweisung des Ausgewählten Bots
-//	{
-//		case 1:
-//			spieler = new SchlauerBot();
-//			break;
-//
-//		case 2:
-//			spieler = new ZufallsBot();
-//			break;
-//
-//		case 3:
-//			spieler = new LowCardBot();
-//			break;
-//
-//		case 4:
-//			spieler = new HighCardBot();
-//			break;
-//
-//		default:
-//			break;
-//	}
-//}
 
 void Steuerung::WerDarfAnfangen(Karte gewaelteKarte1, Karte gewaelteKarte2, Spielfeld* spielfeld, Spieler* spieler1, Spieler* spieler2)
 {
@@ -170,16 +128,9 @@ void Steuerung::spielerLegtKarten(Spielfeld * spielfeld,Spieler * spieler, Karte
 
 }
 
-Spieler* Steuerung::BotWahl(UI ui)
+Spieler* Steuerung::BotWahl(int nummer)
 {
-	int nummer;
-
-	do																					//Bot Auswahl
-	{
-		nummer = ui.AbfrageBot();
-	} while (!(nummer <= 4 && nummer >= 1));
-
-	switch (nummer)																	//Zuweisung des Ausgewählten Bots
+	switch (nummer)																		//Zuweisung des Ausgewählten Bots
 	{
 		case 1:
 			return new SchlauerBot();

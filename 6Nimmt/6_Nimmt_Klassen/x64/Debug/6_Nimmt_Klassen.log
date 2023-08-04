@@ -1,3 +1,2 @@
-﻿  Steuerung.cpp
-C:\DHBW_Informationstechnik_2022\C++\Abschlussprojekt\6Nimmt\6_Nimmt_Klassen\Steuerung.cpp(203): warning C4715: "Steuerung::BotWahl": Nicht alle Codepfade geben einen Wert zurück.
+﻿  UI.cpp
   6_Nimmt_Klassen.vcxproj -> C:\DHBW_Informationstechnik_2022\C++\Abschlussprojekt\6Nimmt\x64\Debug\6_Nimmt_Klassen.lib

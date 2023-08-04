@@ -29,10 +29,6 @@ Karte SchlauerBot::MachZug(Spielfeld * spielfeld)
     }
 
     //Falls man keine Handkarte hat die gößer ist als die Karten in der Reihe
-    /*srand((unsigned int)time(NULL));
-    int random = rand() % längeHandkartenIndex; //0 bis längeHandkartenIndex-1*/
-
     SetGesetzteKarte(handkarten[0]);
-
     return LegeHandkarte(0);
 }
