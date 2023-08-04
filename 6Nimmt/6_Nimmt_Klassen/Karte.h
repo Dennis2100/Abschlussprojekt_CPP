@@ -10,7 +10,7 @@ public:
 	Karte(int zahl);
 	~Karte();
 
-	void zeichnen(int x, int y, bool verdeckt = false);
+	void zeichnen(int x, int y, bool gewaehlt = false);
 	int getZahl();
 	int getStrafpunkte();
 
@@ -20,8 +20,8 @@ private:
 
 	static int karte_index;
 
-	static const int Karte_breite = 15;
-	static const int Karte_hoehe = 10;
+	static const int Karte_breite = 12;
+	static const int Karte_hoehe = 9;
 
 	const static int farben[];
 

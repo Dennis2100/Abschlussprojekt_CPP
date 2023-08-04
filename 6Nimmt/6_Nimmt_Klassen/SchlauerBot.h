@@ -8,6 +8,5 @@ public:
 	SchlauerBot();
 
 	Karte MachZug() override;
-	void AusgewaehlteReiheNehmen(Spielfeld* spielfeld) override;
 };
 

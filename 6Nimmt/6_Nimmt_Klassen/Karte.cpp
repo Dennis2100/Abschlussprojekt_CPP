@@ -51,28 +51,44 @@ int Karte::getStrafpunkte()
 }
 
 /* die Methode zeichnet die Karte an der angegebenen Koordinaten */
-void Karte::zeichnen(int x, int y, bool verdeckt)
+void Karte::zeichnen(int x, int y, bool gewaehlt)
 {
     /* Setzten die Basisfarbe */
-    SetTextColor(farben[0]);
+    int basisfarbe = 0x0F;      //weiss auf schwarzem Hindergrund
+    int straffarbe;
+
+    if (gewaehlt) basisfarbe = 0xF0;  //schwarz auf weissem Hindergrund
+    
+    SetTextColor(basisfarbe);
 
     /* Zeichne die Umrisse von Karte */
     zeichnen_linie(x, y, 43, 45, 43, 1);
     zeichnen_linie(x, y + 1, 124, 32, 124, Karte_hoehe - 3);
     zeichnen_linie(x, y + Karte_hoehe - 2, 43, 45, 43, 1);
 
-    /* Falls sie verdeckt ist, werden die Nummern und die Strafpunkte nicht ausgegeben */
-    if (!verdeckt)
-    {
-        /* Nummern aud der Karte in alle vier Ecken ausgeben */
-        zeichnen_kartennummer(x, y);
+    /* Nummern aud der Karte in alle vier Ecken ausgeben */
+    zeichnen_kartennummer(x, y);
 
-        /* Strafpunkte auf der Karte ausgeben */
-        zeichnen_strafpunkte(x, y, strafpunkte);
+    /* Strafpunkte auf der Karte ausgeben */
+    straffarbe = farben[strafpunkte - 1];
+
+    if (strafpunkte == 1)
+    {
+        straffarbe = basisfarbe;
     }
+    else if(gewaehlt)
+    {
+        straffarbe += basisfarbe;   //Weisse hintergund
+    }
+    
+    SetTextColor(straffarbe);
+    zeichnen_strafpunkte(x, y, strafpunkte);
+    SetTextColor(basisfarbe);
 
     /* zeichne den Ochsenkopf */
     zeichne_kopf(x + Karte_breite / 2 - 3, y + Karte_hoehe / 2 - 1);
+
+    SetTextColor(farben[0]);
 }
 
 void Karte::zeichnen_linie(int xl, int yl, char char1, char char2, char char3, int wiederholen)
@@ -120,8 +136,6 @@ void Karte::zeichnen_strafpunkte(int xp, int yp, int punkte)
 {
     int straf_linies;
 
-    SetTextColor(farben[punkte - 1]);
-
     straf_linies = punkte / 4 + 1; //ab 4 Strafpunkte zeichnet man in zwei Zeilen
     for (int k = 0; k < straf_linies; k++)
     {
@@ -135,5 +149,4 @@ void Karte::zeichnen_strafpunkte(int xp, int yp, int punkte)
             m += 2;
         }
     }
-    SetTextColor(farben[0]);
 }

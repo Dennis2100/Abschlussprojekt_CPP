@@ -16,5 +16,7 @@ public:
 	void SetSpielfeld(int reihe, int spalte, Karte karte);		//Setzt das Spielfeld an der angegebenen Reihe und Spalte
 	int KarteLegen(Karte karte);								//Karte wird gelegt mit einem int als Rückgabe, Beschreibung in der .cpp
 	int GetKartenAnzahl(int reihe);								//Gibt die anzahl der Karten einer Reihe an
+	int getStrafpunkte(int reihe);
+	void ReiheLeeren(int reihe);
 };
 

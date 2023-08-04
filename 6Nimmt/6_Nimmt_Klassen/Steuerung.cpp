@@ -23,39 +23,47 @@ void Steuerung::StarteSpiel()
 	Spielfeld * spielfeld = new Spielfeld();
 	Deck * deck = new Deck();
 
-	Spieler * spieler1;
-	Spieler * spieler2;
+	Spieler * spieler1 = NULL;
+	Spieler * spieler2 = NULL;
 
 	system("MODE CON COLS=200 LINES=200");
+	
+	//if (ui.IstSpielerMensch() == 1)
+	//{
+	//	spieler1 = new Mensch();
 
-	if (ui.IstSpielerMensch() == 1)
-	{
-		spieler1 = new Mensch();
+	//	//spieler2 = new Bot();
+	//	BotWahl(spieler2, ui);
+	//}
+	//else
+	//{
+	//	//spieler1 = new Bot();
+	//	//spieler2 = new Bot();
 
-		spieler2 = new Bot();
-		BotWahl(spieler2, ui);
-	}
-	else
-	{
-		spieler1 = new Bot();
-		spieler2 = new Bot();
+	//	BotWahl(spieler1, ui);
+	//	BotWahl(spieler2, ui);
+	//}
+	
+	spieler1 = new Mensch();
+	//spieler2 = new ZufallsBot();
+	//spieler2 = new LowCardBot();
+	spieler2 = new HighCardBot();
 
-		BotWahl(spieler1, ui);
-		BotWahl(spieler2, ui);
-	}
-
-	Karte gewaelteKarte1;												//vom Spieler gewaehlet Karte
-	Karte gewaelteKarte2;
+	Karte gewaelteKarte1;												//Gewählte Karte von Spieler1
+	Karte gewaelteKarte2;												//Gewählte Karte von Spieler2
 
 	ErstenVier(spielfeld, deck);
 
-	GebenHandkarten(deck, spieler1, spieler2);
-	spieler1->SortierenHandkarten();
-	spieler2->SortierenHandkarten();
+	GebenHandkarten(deck, spieler1);
+	GebenHandkarten(deck, spieler2);
+
+	ui.ScreenVorbereiten();
 
 	for (int i = 0; i < 10; i++)										//Ablauf des Spiels á 10 Runden
 	{
-		ui.AusgabeSpielfeld(spielfeld);
+		ui.ScreenLoeschen();
+		ui.AusgabeSpielfeld(spielfeld,5);
+		ui.SpielerStand(spieler1, spieler2);
 
 		spieler1->MachZug();
 		spieler2->MachZug();
@@ -63,92 +71,27 @@ void Steuerung::StarteSpiel()
 		gewaelteKarte1 = spieler1->GetGesetzteKarte();
 		gewaelteKarte2 = spieler2->GetGesetzteKarte();
 
-		if (gewaelteKarte1.getZahl() < gewaelteKarte2.getZahl())	//Wer darf als erster legen
-		{
-			switch (spielfeld->KarteLegen(gewaelteKarte1))
-			{
-				case 1:
-					//Reihe wählen
-					spieler1->AusgewaehlteReiheNehmen(spielfeld);
-					break;
-
-				case 2:
-					//Ganze Reihe nehmen
-					//SechsNimmt(mensch, spielfeld);
-					break;
-
-				default:
-					break;
-			}
-
-			switch (spielfeld->KarteLegen(gewaelteKarte2))
-			{
-			case 1:
-				//Reihe wählen
-				//AusgewaehlteReiheNehmen(mensch, spielfeld);
-				spieler2->AusgewaehlteReiheNehmen(spielfeld);
-				break;
-
-			case 2:
-				//Ganze Reihe nehmen
-				//SechsNimmt(mensch, spielfeld);
-				break;
-
-			default:
-				break;
-			}
-		}
-		else
-		{
-			switch (spielfeld->KarteLegen(gewaelteKarte2))
-			{
-			case 1:
-				//Reihe wählen
-				//AusgewaehlteReiheNehmen(mensch, spielfeld);
-				spieler2->AusgewaehlteReiheNehmen(spielfeld);
-				break;
-
-			case 2:
-				//Ganze Reihe nehmen
-				//SechsNimmt(mensch, spielfeld);
-				break;
-
-			default:
-				break;
-			}
-
-			switch (spielfeld->KarteLegen(gewaelteKarte1))
-			{
-			case 1:
-				//Reihe wählen
-				//AusgewaehlteReiheNehmen(mensch, spielfeld);
-				spieler1->AusgewaehlteReiheNehmen(spielfeld);
-				break;
-
-			case 2:
-				//Ganze Reihe nehmen
-				//SechsNimmt(mensch, spielfeld);
-				break;
-
-			default:
-				break;
-			}
-		}
+		WerDarfAnfangen(gewaelteKarte1, gewaelteKarte2, spielfeld, spieler1, spieler2);
 	}
 
-	ui.SiegerEhrung(spieler1, spieler2);										//Gewinner wird ermittelt
+	ui.ScreenLoeschen();
+	ui.AusgabeSpielfeld(spielfeld,5);
+	ui.SpielerStand(spieler1, spieler2);
+
+	ui.SiegerEhrung(spieler1, spieler2);								//Gewinner wird ermittelt
+	std::cin.get();
 }
 
-void Steuerung::GebenHandkarten(Deck * deck, Spieler * spieler1, Spieler * spieler2)	//Verteilen der Handkarten
+void Steuerung::GebenHandkarten(Deck * deck, Spieler * spieler)	//Verteilen der Handkarten
 {
 	for (int i = 0; i < 10; i++)
 	{
-		spieler1->SetHandkarteBeiIndex(i, deck->Dealer());
-		spieler2->SetHandkarteBeiIndex(i, deck->Dealer());
+		spieler->SetHandkarteBeiIndex(i, deck->Dealer());
 	}
+	spieler->SortierenHandkarten();
 }
 
-void Steuerung::ErstenVier(Spielfeld * spielfeld, Deck  * deck)			//Einsetzen der ersten 4 Karten auf das Spielfeld
+void Steuerung::ErstenVier(Spielfeld * spielfeld, Deck  * deck)							//Einsetzen der ersten 4 Karten auf das Spielfeld
 {
 	for(int i = 0; i < 4; i++)
 	{
@@ -156,30 +99,72 @@ void Steuerung::ErstenVier(Spielfeld * spielfeld, Deck  * deck)			//Einsetzen de
 	}
 }
 
-void Steuerung::BotWahl(Spieler * bot, UI ui)
+void Steuerung::BotWahl(Spieler * spieler, UI ui)
 {
 	int botAbfrage;
 
-	do																	//Bot Auswahl
+	do																					//Bot Auswahl
 	{
 		botAbfrage = ui.AbfrageBot();
 	} while (!(botAbfrage <= 4 && botAbfrage >= 1));
 
-	switch (botAbfrage)													//Zuweisung des Ausgewählten Bots
+	switch (botAbfrage)																	//Zuweisung des Ausgewählten Bots
 	{
 		case 1:
-			bot = new SchlauerBot();
+			spieler = new SchlauerBot();
 			break;
 
 		case 2:
-			bot = new ZufallsBot();
+			spieler = new ZufallsBot();
 			break;
 
 		case 3:
-			bot = new LowCardBot();
+			spieler = new LowCardBot();
 			break;
 
 		case 4:
-			bot = new HighCardBot();
+			spieler = new HighCardBot();
+			break;
+
+		default:
+			break;
 	}
+}
+
+void Steuerung::WerDarfAnfangen(Karte gewaelteKarte1, Karte gewaelteKarte2, Spielfeld* spielfeld, Spieler* spieler1, Spieler* spieler2)
+{
+	if (gewaelteKarte1.getZahl() < gewaelteKarte2.getZahl())							//Wer darf als erster legen
+	{
+		spielerLegtKarten(spielfeld, spieler1, gewaelteKarte1);
+		spielerLegtKarten(spielfeld, spieler2, gewaelteKarte2);
+	}
+	else
+	{
+		spielerLegtKarten(spielfeld, spieler2, gewaelteKarte2);
+		spielerLegtKarten(spielfeld, spieler1, gewaelteKarte1);
+	}
+}
+
+void Steuerung::spielerLegtKarten(Spielfeld * spielfeld,Spieler * spieler, Karte karte)
+{
+	int rueckgabe;
+	
+	rueckgabe = spielfeld->KarteLegen(karte);
+	switch (rueckgabe)
+	{
+	case 4:
+		//Reihe wählen
+		spieler->AusgewaehlteReiheNehmen(spielfeld);
+		break;
+
+	case 5:
+		//Kart angenommen, keine weitere Aktion erforderlich
+		break;
+
+	default:
+		//Ganze Reihe nehmen, rueckgabe = 0..3
+		spieler->ReiheNimmt(rueckgabe, spielfeld);
+		break;
+	}
+
 }

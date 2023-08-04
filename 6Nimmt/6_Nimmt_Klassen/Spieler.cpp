@@ -37,8 +37,8 @@ void Spieler::LöscheGelegteHandkarte(int index)
 	Karte zwischenspeicher;
 
 	zwischenspeicher = handkarten[index];
-	handkarten[index] = handkarten[längeHandkartenIndex];
-	handkarten[längeHandkartenIndex] = zwischenspeicher;
+	handkarten[index] = handkarten[längeHandkartenIndex - 1];
+	handkarten[längeHandkartenIndex - 1] = zwischenspeicher;
 
 	längeHandkartenIndex--;
 }
@@ -68,22 +68,14 @@ std::string Spieler::GetName()
 	return name;
 }
 
-void Spieler::ReiheNimmt(int spalte, Spielfeld* spielfeld)
+void Spieler::ReiheNimmt(int reihe, Spielfeld* spielfeld)
 {
-	int strafpunkte = 0;
 	Karte platzhalter;
 
-	for (int i = 0; i < 5; i++)
-	{
-		strafpunkte += spielfeld->GetSpielfeld(i, spalte).getStrafpunkte();
-		spielfeld->SetSpielfeld(i, spalte, platzhalter);
-	}
-
-	spielfeld->SetSpielfeld(5, spalte, platzhalter);
-
-	spielfeld->SetSpielfeld(0, spalte, gesetzteKarte);
-
-	punktestand = strafpunkte;
+	punktestand += spielfeld->getStrafpunkte(reihe);
+	
+	spielfeld->ReiheLeeren(reihe);
+	spielfeld->KarteLegen(gesetzteKarte);
 }
 
 void Spieler::SortierenHandkarten()
@@ -93,40 +85,45 @@ void Spieler::SortierenHandkarten()
 
 void Spieler::HeapSort()
 {
+	//Heap bauen
 	for (int i = längeHandkartenIndex / 2 -1; i >= 0; i--)
 	{
 		Heapify(längeHandkartenIndex, i);
 	}
 
+	//Elemente einzeln herausnehmen
 	for (int i = längeHandkartenIndex - 1; i >= 0; i--)
 	{
-		SwapHandkarten(0, i);
+		SwapHandkarten(0, i);	//Aktuellen root ans Ende bewegen
 
-		Heapify(i, 0);
+		Heapify(i, 0);			//Wieder Heapify auf den Unterbaum aufrufen
 	}
 }
 
 void Spieler::Heapify(int index, int root)
 {
-	int largest = root;
-	int l = 2 * root + 1;
-	int r = 2 * root + 2;
+	int largest = root;		//root ist das größte Element
+	int l = 2 * root + 1;	//links = 2*root + 1
+	int r = 2 * root + 2;	//rechts = 2*root + 2
 
+	//Linkes Kindelement ist größer als root
 	if (l < index && handkarten[l].getZahl() > handkarten[largest].getZahl())
 	{
 		largest = l;
 	}
 
+	//Rechtes Kindelement ist größer als root
 	if (r < index && handkarten[r].getZahl() > handkarten[largest].getZahl())
 	{
 		largest = r;
 	}
 
+	//Größtes Element (largest) ist nicht root
 	if (largest != root)
 	{
-		SwapHandkarten(root, largest);
+		SwapHandkarten(root, largest);	//Vertauschen von root und dem größten Element
 
-		Heapify(index, largest);
+		Heapify(index, largest);		//Heapify der Unterbäume
 	}
 }
 

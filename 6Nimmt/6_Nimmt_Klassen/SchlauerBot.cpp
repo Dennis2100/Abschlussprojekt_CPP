@@ -8,9 +8,7 @@ SchlauerBot::SchlauerBot()
 
 Karte SchlauerBot::MachZug()
 {
-    return Karte();
-}
 
-void SchlauerBot::AusgewaehlteReiheNehmen(Spielfeld* spielfeld)
-{
+
+    return Karte();
 }

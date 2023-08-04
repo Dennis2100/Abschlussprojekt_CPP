@@ -6,11 +6,6 @@ Bot::Bot()
 
 }
 
-Karte Bot::MachZug()
-{
-	return Karte();
-}
-
 void Bot::AusgewaehlteReiheNehmen(Spielfeld* spielfeld)
 {
 	int spalte = 0;

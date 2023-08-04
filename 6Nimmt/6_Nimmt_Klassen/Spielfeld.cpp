@@ -19,14 +19,14 @@ void Spielfeld::SetSpielfeld(int reihe, int spalte, Karte karte)
 
 /* die Methode plaziert eine Karte auf dem Spielfeld
    Rueckgabe Werte:
-	 0 - die Karte angenommen, keine interaktion erforderlich
-	 1 - die Karte ist kleiner als die letzten Karten in allen Reihen, es muss gewählt werden welche Reihe wird genommen
-	 2 - die Karte angenommen, dabei wurden 5 anderen Karten von der entsprechende Reihe kassiert */
+	 0 bis 3 - die Karte angenommen, die Reihe mit den angegebenen Index muss genommen werden, da die sechste Karte
+	 4 - die Karte ist kleiner als die letzten Karten in allen Reihen, es muss gewählt werden welche Reihe wird genommen
+	 5 - die Karte angenommen, keine Interaktion erforderlich */
 
 int Spielfeld::KarteLegen(Karte karte)
 {
 	int diff = max_diff;
-	int retWert = 0;
+	int retWert = 5;
 	int tmp_diff;
 	int idx = 4;
 
@@ -48,7 +48,7 @@ int Spielfeld::KarteLegen(Karte karte)
 				tmp_diff = karte.getZahl() - tmp_karte.getZahl();
 				if (tmp_diff < diff)
 				{
-					tmp_diff = diff;
+					diff = tmp_diff;
 					idx = i;
 				}
 
@@ -66,19 +66,35 @@ int Spielfeld::KarteLegen(Karte karte)
 		else
 		{
 
-			retWert = 2;
+			retWert = idx;
 		}
 	}
 	else
 	{
 		/*  */
-		retWert = 1;
+		retWert = 4;
 	}
 
 	return retWert;
 }
 
+void Spielfeld::ReiheLeeren(int reihe)
+{
+	kartenzahl[reihe] = 0;
+}
+
 int Spielfeld::GetKartenAnzahl(int reihe)
 {
 	return kartenzahl[reihe];
+}
+
+int Spielfeld::getStrafpunkte(int reihe)
+{
+	int summe = 0;
+	for (int i = 0; i < kartenzahl[reihe]; i++)
+	{
+		summe += (spielfeld[reihe][i]).getStrafpunkte();
+	}
+
+	return summe;
 }
