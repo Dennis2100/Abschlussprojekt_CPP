@@ -17,16 +17,17 @@ Steuerung::Steuerung()
 {
 }
 
-int Steuerung::StarteSpiel(int istSpielerMensch, int botWahl1, int botWahl2)
+int Steuerung::StarteSpiel(int istSpielerMensch, int botWahl1, int botWahl2, bool konsolenausgabe,int seek)
 {
 	UI ui;
-	Spielfeld * spielfeld = new Spielfeld();
-	Deck * deck = new Deck();
+	int sieger;
+	Spielfeld* spielfeld = new Spielfeld();
+	Deck* deck = new Deck();
 
-	Spieler * spieler1 = NULL;
-	Spieler * spieler2 = NULL;
+	deck->SetRandomizer(seek);
 
-	system("MODE CON COLS=200 LINES=200");
+	Spieler* spieler1 = NULL;
+	Spieler* spieler2 = NULL;
 
 	if (istSpielerMensch == 1)
 	{
@@ -48,13 +49,16 @@ int Steuerung::StarteSpiel(int istSpielerMensch, int botWahl1, int botWahl2)
 	GebenHandkarten(deck, spieler1);
 	GebenHandkarten(deck, spieler2);
 
-	ui.ScreenVorbereiten();
+	if (konsolenausgabe) ui.ScreenVorbereiten();
 
 	for (int i = 0; i < 10; i++)										//Ablauf des Spiels á 10 Runden
 	{
-		ui.ScreenLoeschen();
-		ui.AusgabeSpielfeld(spielfeld,5);
-		ui.SpielerStand(spieler1, spieler2);
+		if (konsolenausgabe)   //Unterdrückung der Konsolenausgabe um die Tests zu beschleunigen
+		{
+			ui.ScreenLoeschen();
+			ui.AusgabeSpielfeld(spielfeld, 5);
+			ui.SpielerStand(spieler1, spieler2);
+		}
 
 		spieler1->MachZug(spielfeld);
 		spieler2->MachZug(spielfeld);
@@ -65,12 +69,21 @@ int Steuerung::StarteSpiel(int istSpielerMensch, int botWahl1, int botWahl2)
 		WerDarfAnfangen(gewaelteKarte1, gewaelteKarte2, spielfeld, spieler1, spieler2);
 	}
 
-	ui.ScreenLoeschen();
-	ui.AusgabeSpielfeld(spielfeld,5);
-	ui.SpielerStand(spieler1, spieler2);
+	if (konsolenausgabe)
+	{
+	    ui.ScreenLoeschen();
+	    ui.AusgabeSpielfeld(spielfeld, 5);
+	    ui.SpielerStand(spieler1, spieler2);
+    }
 
-	return ui.SiegerEhrung(spieler1, spieler2);								//Gewinner wird ermittelt
-	std::cin.get();
+	sieger = SiegerBestimmung(spieler1, spieler2);
+	if (konsolenausgabe)
+	{
+		ui.SiegerEhrung(sieger, spieler1, spieler2);
+		std::cin.get();
+	}
+	return sieger;								//Gewinner wird ermittelt
+
 }
 
 void Steuerung::GebenHandkarten(Deck * deck, Spieler * spieler)	//Verteilen der Handkarten
@@ -81,6 +94,7 @@ void Steuerung::GebenHandkarten(Deck * deck, Spieler * spieler)	//Verteilen der 
 	}
 	spieler->SortierenHandkarten();
 }
+
 
 void Steuerung::ErstenVier(Spielfeld * spielfeld, Deck  * deck)							//Einsetzen der ersten 4 Karten auf das Spielfeld
 {
@@ -126,6 +140,22 @@ void Steuerung::spielerLegtKarten(Spielfeld * spielfeld,Spieler * spieler, Karte
 		break;
 	}
 
+}
+
+int Steuerung::SiegerBestimmung(Spieler* spieler1, Spieler* spieler2)		//Ermittlung des Gewinners
+{
+	if (spieler1->GetPunktestand() < spieler2->GetPunktestand())
+	{
+		return 1;
+	}
+	else if (spieler1->GetPunktestand() > spieler2->GetPunktestand())
+	{
+		return 2;
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 Spieler* Steuerung::BotWahl(int nummer)

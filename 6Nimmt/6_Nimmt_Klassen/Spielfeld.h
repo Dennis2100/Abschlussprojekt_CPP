@@ -10,13 +10,14 @@ class Spielfeld
 
 public:
 
-	Spielfeld();												//Standart-Konstruktor
+	Spielfeld();												//Standard-Konstruktor
 
 	Karte GetSpielfeld(int reihe, int spalte);					//Gibt die Karte an der angegebenen Reihe und Spalte zurück 
+	Karte GetLetzteKarte(int reihe);							//Gibt die letzte Karte einer Reihe an
 	void SetSpielfeld(int reihe, int spalte, Karte karte);		//Setzt das Spielfeld an der angegebenen Reihe und Spalte
 	int KarteLegen(Karte karte);								//Karte wird gelegt mit einem int als Rückgabe, Beschreibung in der .cpp
 	int GetKartenAnzahl(int reihe);								//Gibt die anzahl der Karten einer Reihe an
-	int getStrafpunkte(int reihe);
-	void ReiheLeeren(int reihe);
+	int getStrafpunkte(int reihe);								//Gibt die Strafpunkte 
+	void ReiheLeeren(int reihe);								//
 };
 

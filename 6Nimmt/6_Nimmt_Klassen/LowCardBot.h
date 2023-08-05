@@ -5,9 +5,9 @@
 class LowCardBot : public Bot
 {
 
-public: 
-	LowCardBot();
+public:		
+	LowCardBot();									//Standardkonstruktor
 
-	Karte MachZug(Spielfeld * spielfeld) override;
+	Karte MachZug(Spielfeld * spielfeld) override;	//Macht einen Zug
 };
 
