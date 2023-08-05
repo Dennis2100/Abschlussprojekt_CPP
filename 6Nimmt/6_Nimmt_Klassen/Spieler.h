@@ -7,7 +7,7 @@ class Spieler
 	
 
 public:
-	Spieler();
+	Spieler();																	//Standardkonstruktor
 
 	void SetPunktestand(int punktestand);										//Strafpunkte setzen
 	int GetPunktestand();														//Strafpunkte ausgeben
@@ -21,7 +21,6 @@ public:
 	std::string GetName();														//Gibt den Namen des Spielers zurück
 
 	void ReiheNimmt(int spalte, Spielfeld * spielfeld);							//Die Reihe wird genommen, die Strafpunkte für den Spieler werden berechnet, erste Karte wird zur gesetzten Karte des Spielers
-	//void SechsNimmt(int spalte, Spielfeld * spielfeld);
 
 	void SortierenHandkarten();													//Sortiert die Handkarten des Spielers
 	void HeapSort();															//

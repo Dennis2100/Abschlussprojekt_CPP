@@ -6,8 +6,8 @@ class HighCardBot : public Bot
 {
 
 public:
-	HighCardBot();
+	HighCardBot();									//Standardkonstruktor
 
-	Karte MachZug(Spielfeld * spielfeld) override;
+	Karte MachZug(Spielfeld * spielfeld) override;	//Macht einen Zug
 };
 

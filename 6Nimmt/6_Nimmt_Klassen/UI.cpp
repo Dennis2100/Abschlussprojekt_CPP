@@ -21,7 +21,7 @@ UI::UI()
 
 void UI::ScreenVorbereiten()
 {
-	system("mode con COLS=200 LINES=60");
+	system("mode con COLS=200 LINES=200");
 	::ShowWindow(GetConsoleWindow(), SW_MAXIMIZE);
 	::SendMessage(::GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000);
 	ScreenLoeschen();
@@ -108,23 +108,20 @@ int UI::EingabeKarte(Karte* handkarten, int längeHandkartenIndex)				//Auswahl d
 	return gewaehlteKarte;
 }
 
-int UI::SiegerEhrung(Spieler * spieler1, Spieler * spieler2)		//Ermittlung des Gewinners
+void UI::SiegerEhrung(int sieger, Spieler* spieler1, Spieler* spieler2)		//Ermittlung des Gewinners
 {
 	SetCursorPosition(1, 32);
-	if (spieler1->GetPunktestand() < spieler2->GetPunktestand())
+	switch (sieger)
 	{
-		std::cout << spieler1->GetName() << " hat Gewonnen!";
-		return 1;
-	}
-	else if(spieler1->GetPunktestand() > spieler2->GetPunktestand())
-	{
-		std::cout << spieler2->GetName() << " hat Gewonnen!";
-		return 2;
-	}
-	else
-	{
-		std::cout << "Es ist ein unentschieden!";
-		return 0;
+		 case 0:
+			 std::cout << "Es ist ein unentschieden!";
+			 break;
+		 case 1:
+			 std::cout << spieler1->GetName() << " hat Gewonnen!";
+			 break;
+		 case 2:
+			 std::cout << spieler2->GetName() << " hat Gewonnen!";
+			 break;
 	}
 }
 

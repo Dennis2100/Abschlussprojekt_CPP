@@ -12,6 +12,11 @@ Karte Spielfeld::GetSpielfeld(int reihe, int spalte)
 	return spielfeld[reihe][spalte];
 }
 
+Karte Spielfeld::GetLetzteKarte(int reihe)
+{
+	return spielfeld[reihe][kartenzahl[reihe]];
+}
+
 void Spielfeld::SetSpielfeld(int reihe, int spalte, Karte karte)
 {
 	spielfeld[reihe][spalte] = karte;
