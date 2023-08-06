@@ -8,19 +8,21 @@ Mensch::Mensch()
 	name = "Mensch";
 }
 
-Karte Mensch::MachZug(Spielfeld * spielfeld)						//Mensch macht einen Zug
+//Mensch macht einen Zug
+Karte Mensch::MachZug(Spielfeld * spielfeld)						
 {
 	UI ui;
 	int eingabe;
 	
-	eingabe = ui.EingabeKarte(handkarten, längeHandkartenIndex);	//Eingabe der zu legenen Karte
+	eingabe = ui.EingabeKarte(handkarten, laengeHandkartenIndex);	//Eingabe der zu legenen Karte
 	
 	SetGesetzteKarte(handkarten[eingabe]);							//
 																	//Setzen der ausgewählten Karte
 	return LegeHandkarte(eingabe);									//
 }
 
-void Mensch::AusgewaehlteReiheNehmen(Spielfeld* spielfeld)			//Mensch wählt eine Reihe zum nehmen aus
+//Mensch wählt eine Reihe zum nehmen aus
+void Mensch::AusgewaehlteReiheNehmen(Spielfeld* spielfeld)			
 {
 	int eingabe;
 	UI ui;

@@ -6,11 +6,11 @@ class Karte {
 
 public:
 	Karte(void);
-	Karte(int zahl);
+	Karte(const int zahl);
 	~Karte();
 
-	int getZahl();
-	int getStrafpunkte();
+	int GetZahl();
+	int GetStrafpunkte();
 
 private:
 	int strafpunkte;

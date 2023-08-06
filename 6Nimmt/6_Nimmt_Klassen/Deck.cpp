@@ -13,12 +13,14 @@ Deck::Deck()
 	deckLänge = 104;
 }
 
-void Deck::SetRandomizer(int seek)		//Hilft dabei eine Zufällige Zahl zu generieren
+//Hilft dabei eine Zufällige Zahl zu generieren
+void Deck::SetRandomizer(const int seek)		
 {
 	randomizer = seek;
 }
 
-Karte Deck::Dealer()		//Gibt eine zufällige Karte aus dem Deck zurück
+//Gibt eine zufällige Karte aus dem Deck zurück
+Karte Deck::Dealer()		
 {
 	Karte rueckgabe;
 
@@ -37,7 +39,8 @@ Karte Deck::Dealer()		//Gibt eine zufällige Karte aus dem Deck zurück
 	return rueckgabe;
 }
 
-void Deck::KarteAusDeckLöschen(int index)		//Eine Karte am angegebenen index wird gelöscht
+//Eine Karte am angegebenen index wird gelöscht
+void Deck::KarteAusDeckLöschen(const int index)		
 {
 	Karte zwischenspeicher;
 

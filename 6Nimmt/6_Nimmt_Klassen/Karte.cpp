@@ -1,13 +1,15 @@
 #include "pch.h"
 #include "Karte.h"
 
-Karte::Karte(void)          //Einfacher Standardkonstruktor
+//Einfacher Standardkonstruktor
+Karte::Karte(void)          
 {
     strafpunkte = 0;
     zahl = 0;
 }
 
-Karte::Karte(int z)         //Standardkobstruktor mit direkter ermittlung der Strafpunkte
+//Standardkobstruktor mit direkter ermittlung der Strafpunkte
+Karte::Karte(const int z)         
 {
     if (z == 55)
     {
@@ -37,12 +39,14 @@ Karte::~Karte()
 {
 }
 
-int Karte::getZahl()            //Gibt die Zahl einer Karte zurück
+//Gibt die Zahl einer Karte zurück
+int Karte::GetZahl()            
 {
     return zahl;
 }
 
-int Karte::getStrafpunkte()     //Gibt die Strafpunkte einer Karte zurück
+//Gibt die Strafpunkte einer Karte zurück
+int Karte::GetStrafpunkte()     
 {
     return strafpunkte;
 }

@@ -68,6 +68,7 @@ TEST(SchlauerbotVsHighCardBot, HighCardBot) {
 	EXPECT_GE(prozent, 80.0);
 }
 
+// 4 - die Karte ist kleiner als die letzten Karten in allen Reihen, es muss gewählt werden welche Reihe wird genommen
 TEST(KarteLegenReiheZumNehmenWaehlen, SpielfeldRueckgabe4) {
 	Spielfeld spielfeld;
 
@@ -81,7 +82,8 @@ TEST(KarteLegenReiheZumNehmenWaehlen, SpielfeldRueckgabe4) {
 	EXPECT_EQ(spielfeld.KarteLegen(Karte(1)), 4);
 }
 
-TEST(KarteLegenReiheZumNehmenWaehlen, SpielfeldRueckgabe5) {
+// 5 - die Karte angenommen, keine Interaktion erforderlich
+TEST(KarteLegenKarteAngenommen, SpielfeldRueckgabe5) {
 	Spielfeld spielfeld;
 
 	Karte kartenArray[4]{ Karte(2), Karte(10), Karte(21), Karte(50) };
@@ -92,4 +94,51 @@ TEST(KarteLegenReiheZumNehmenWaehlen, SpielfeldRueckgabe5) {
 	}
 
 	EXPECT_EQ(spielfeld.KarteLegen(Karte(3)), 5);
+}
+
+// 0 bis 3 - die Karte angenommen, die Reihe mit den angegebenen Index muss genommen werden, da die sechste Karte
+TEST(KarteLegenReiheZumNehmenWaehlen, SpielfeldRueckgabe0123) {
+	Spielfeld spielfeld;
+
+	Karte kartenArray[4][5]{};
+
+	for (int i = 0; i < 4; i++)
+	{
+		for (int c = 0; c < 5; c++)
+		{
+			kartenArray[i][c] = Karte((c + 1) + (i * 10));
+		}
+	}
+
+	for (int i = 0; i < 4 ; i++)
+	{
+		for (int c = 0; c < 5; c++)
+		{
+			spielfeld.KarteLegen(kartenArray[i][c]);
+		}
+	}
+
+	EXPECT_TRUE((spielfeld.KarteLegen(50)) >= 0 && (spielfeld.KarteLegen(50) <= 3));
+}
+
+// Werden die Strafpunkte einer Reihe richtig zurückgegeben
+TEST(GetStrafpunkteRichtigeAusgabe, GetStrafpunkte) {
+	Spielfeld spielfeld;
+
+	Karte kartenArray[4]{ Karte(1), Karte(10), Karte(20), Karte(30) };
+
+	for (int i = 0; i < 4; i++)
+	{
+		spielfeld.KarteLegen(kartenArray[i]);
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		for (int c = 1; c < 5; c++)
+		{
+			spielfeld.KarteLegen((c + 1) + (i * 10));
+		}
+	}
+
+	EXPECT_EQ(spielfeld.GetStrafpunkte(0), 6);
 }

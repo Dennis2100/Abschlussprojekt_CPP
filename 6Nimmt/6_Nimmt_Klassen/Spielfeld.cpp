@@ -4,20 +4,24 @@
 
 Spielfeld::Spielfeld()
 {
-	Karte spielfeld[4][6];
 }
 
-Karte Spielfeld::GetSpielfeld(int reihe, int spalte)
+Spielfeld::~Spielfeld()
+{
+}
+
+Karte Spielfeld::GetSpielfeld(const int reihe, const int spalte)
 {
 	return spielfeld[reihe][spalte];
 }
 
-Karte Spielfeld::GetLetzteKarte(int reihe)		//Gibt die letzte Karte einer Reihe zurück
+//Gibt die letzte Karte einer Reihe zurück
+Karte Spielfeld::GetLetzteKarte(const int reihe)		
 {
 	return spielfeld[reihe][kartenzahl[reihe]];
 }
 
-void Spielfeld::SetSpielfeld(int reihe, int spalte, Karte karte)
+void Spielfeld::SetSpielfeld(const int reihe, const int spalte, const Karte karte)
 {
 	spielfeld[reihe][spalte] = karte;
 }
@@ -27,7 +31,6 @@ void Spielfeld::SetSpielfeld(int reihe, int spalte, Karte karte)
 	 0 bis 3 - die Karte angenommen, die Reihe mit den angegebenen Index muss genommen werden, da die sechste Karte
 	 4 - die Karte ist kleiner als die letzten Karten in allen Reihen, es muss gewählt werden welche Reihe wird genommen
 	 5 - die Karte angenommen, keine Interaktion erforderlich */
-
 int Spielfeld::KarteLegen(Karte karte)		//Ermittelt ob eine Karte ohne weiteres gelegt werden kann
 {
 	int diff = max_diff;
@@ -48,9 +51,9 @@ int Spielfeld::KarteLegen(Karte karte)		//Ermittelt ob eine Karte ohne weiteres 
 			Karte tmp_karte;
 			tmp_karte = spielfeld[i][kartenzahl[i] - 1];
 
-			if (karte.getZahl() > tmp_karte.getZahl())
+			if (karte.GetZahl() > tmp_karte.GetZahl())
 			{
-				tmp_diff = karte.getZahl() - tmp_karte.getZahl();
+				tmp_diff = karte.GetZahl() - tmp_karte.GetZahl();
 				if (tmp_diff < diff)
 				{
 					diff = tmp_diff;
@@ -83,22 +86,24 @@ int Spielfeld::KarteLegen(Karte karte)		//Ermittelt ob eine Karte ohne weiteres 
 	return retWert;
 }
 
-void Spielfeld::ReiheLeeren(int reihe)
+void Spielfeld::ReiheLeeren(const int reihe)
 {
 	kartenzahl[reihe] = 0;
 }
 
-int Spielfeld::GetKartenAnzahl(int reihe)		//Gibt die Anzahl an Karten in einer Reihe zurück
+//Gibt die Anzahl an Karten in einer Reihe zurück
+int Spielfeld::GetKartenAnzahl(const int reihe)		
 {
 	return kartenzahl[reihe];
 }
 
-int Spielfeld::getStrafpunkte(int reihe)		//Gibt die Strafpunkte einer Reihe zurück
+//Gibt die Strafpunkte einer Reihe zurück
+int Spielfeld::GetStrafpunkte(const int reihe)		
 {
 	int summe = 0;
 	for (int i = 0; i < kartenzahl[reihe]; i++)
 	{
-		summe += (spielfeld[reihe][i]).getStrafpunkte();
+		summe += (spielfeld[reihe][i]).GetStrafpunkte();
 	}
 
 	return summe;

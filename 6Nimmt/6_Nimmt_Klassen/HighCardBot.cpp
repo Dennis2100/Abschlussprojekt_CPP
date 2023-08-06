@@ -7,9 +7,10 @@ HighCardBot::HighCardBot()
 	name = "HighCardBot";
 }
 
-Karte HighCardBot::MachZug(Spielfeld * spielfeld)		//HighCardBot macht einen Zug
+//HighCardBot macht einen Zug
+Karte HighCardBot::MachZug(Spielfeld * spielfeld)		
 {
-	int index = längeHandkartenIndex - 1;
+	int index = laengeHandkartenIndex - 1;
 
 	SetGesetzteKarte(handkarten[index]);				//
 														//Setzt die Höchste Karte auf der Hand

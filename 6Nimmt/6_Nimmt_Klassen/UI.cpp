@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "UI.h"
 #include <iostream>
 #include <string.h>
@@ -15,39 +15,46 @@ UI::UI()
 {
 }
 
+UI::~UI()
+{
+}
+
 void UI::ScreenVorbereiten()
 {
-	system("mode con COLS=200 LINES=200");
-	::ShowWindow(GetConsoleWindow(), SW_MAXIMIZE);
-	::SendMessage(::GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000);
+	system("mode con COLS=200 LINES=300");
+	//::ShowWindow(GetConsoleWindow(), SW_MAXIMIZE);
+	//::SendMessage(::GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000);
 	ScreenLoeschen();
 }
 
-void UI::ScreenLoeschen()		//Aktuelle Ausgabe wird gelöscht
+//Aktuelle Ausgabe wird gelÃ¶scht
+void UI::ScreenLoeschen()		
 {
 	system("cls");
 }
 
-void UI::AusgabeSpielfeld(Spielfeld * spielfeld, int activeReihe)			//Aktuelles Spielfeld ausgeben
+//Aktuelles Spielfeld ausgeben
+void UI::AusgabeSpielfeld(Spielfeld * spielfeld, const int activeReihe)			
 {
 	for (short i = 0; i < 4; i++)
 	{
 		for(short c = 0; c < spielfeld->GetKartenAnzahl(i); c++)
 		{
-			karte_zeichnen(spielfeld->GetSpielfeld(i, c), c * (KARTE_BREITE), i * (KARTE_HOEHE-1), (i == activeReihe));
+			Karte_Zeichnen(spielfeld->GetSpielfeld(i, c), c * (KARTE_BREITE), i * (KARTE_HOEHE-1), (i == activeReihe));
 		}
 	}
 }
 
-void UI::SpielerStand(Spieler * spieler1, Spieler * spieler2)		//Ausgabe des aktuellen Spielerstands
+//Ausgabe des aktuellen Spielerstands
+void UI::SpielerStand(Spieler * spieler1, Spieler * spieler2)		
 {
 	SetCursorPosition(15+ KARTE_BREITE*5, 2);
 	std::cout << spieler1->GetName() << " (" << spieler1->GetPunktestand() << ")  -  " << spieler2->GetName() << " (" << spieler2->GetPunktestand() << ")";
 
 }
 
-
-int UI::AbfrageBot()				//Frage welcher Bot verwendet werden soll
+//Frage welcher Bot verwendet werden soll
+int UI::AbfrageBot()				
 {
 	int eingabe = 0;
 
@@ -63,17 +70,24 @@ int UI::AbfrageBot()				//Frage welcher Bot verwendet werden soll
 	return eingabe;
 }
 
-void UI::AusgabeHandkarten(Karte * handkarten, int längeHandkartenIndex, int gewaehlteKarte)		//Graphische Ausgabe der Handkarten des Menschspielers
+//Graphische Ausgabe der Handkarten des Menschspielers
+void UI::AusgabeHandkarten(Karte * handkarten, const int laengeHandkartenIndex, const int gewaehlteKarte)		
 {
-	for (short i = 0; i < längeHandkartenIndex; i++)
+	for (short i = 0; i < laengeHandkartenIndex; i++)
 	{
-	 	karte_zeichnen(handkarten[i], 5 + (i+1) * KARTE_BREITE, 4*KARTE_HOEHE-1,(i == gewaehlteKarte));
+	 	Karte_Zeichnen(handkarten[i], 5 + (i+1) * KARTE_BREITE, 4*KARTE_HOEHE-1,(i == gewaehlteKarte));
+	}
+
+	for (short j = laengeHandkartenIndex; j < 10; j++)
+	{
+		Zeichnen_Linie( 5 + (j+1) * KARTE_BREITE, 4 * KARTE_HOEHE - 1,' ',' ',' ',KARTE_HOEHE);
 	}
 
 	std::cout << "\n";
 }
 
-int UI::EingabeKarte(Karte* handkarten, int längeHandkartenIndex)				//Auswahl der zu legenden Karte für den Menschspieler
+//Auswahl der zu legenden Karte fÃ¼r den Menschspieler
+int UI::EingabeKarte(Karte* handkarten, const int laengeHandkartenIndex)				
 {
 	int c;
 	bool endlos = true;
@@ -84,7 +98,7 @@ int UI::EingabeKarte(Karte* handkarten, int längeHandkartenIndex)				//Auswahl d
 	
 	while (endlos)
 	{
-		AusgabeHandkarten(handkarten, längeHandkartenIndex, gewaehlteKarte);	//Gibt die Handkarten aus
+		AusgabeHandkarten(handkarten, laengeHandkartenIndex, gewaehlteKarte);	//Gibt die Handkarten aus
 		c = _getch();
 
 		if (c == 0 or c == 224)
@@ -95,7 +109,7 @@ int UI::EingabeKarte(Karte* handkarten, int längeHandkartenIndex)				//Auswahl d
 					if (gewaehlteKarte > 0) gewaehlteKarte--;
 					break;
 				case RECHTS:
-					if (gewaehlteKarte < längeHandkartenIndex - 1) gewaehlteKarte++;
+					if (gewaehlteKarte < laengeHandkartenIndex - 1) gewaehlteKarte++;
 					break;
 			}
 		}
@@ -104,13 +118,22 @@ int UI::EingabeKarte(Karte* handkarten, int längeHandkartenIndex)				//Auswahl d
 			endlos = false;
 		}
 
-		AusgabeHandkarten(handkarten, längeHandkartenIndex, längeHandkartenIndex+1);
+		AusgabeHandkarten(handkarten, laengeHandkartenIndex, laengeHandkartenIndex+1);
 	}
 
 	return gewaehlteKarte;
 }
 
-void UI::SiegerEhrung(int sieger, Spieler* spieler1, Spieler* spieler2)		//Ermittlung des Gewinners
+void UI::ZeigeZug(Spieler* spieler1, Spieler* spieler2)
+{
+	Karte_Zeichnen(spieler2->GetGesetzteKarte(), 18 + KARTE_BREITE * 5, 5);
+	Karte_Zeichnen(spieler1->GetGesetzteKarte(), 22 + KARTE_BREITE * 5, 5 + KARTE_HOEHE);
+	AusgabeHandkarten(spieler1->GetHandkarten(), spieler1->GetHandkartenIndexLaenge(), spieler1->GetHandkartenIndexLaenge() + 1);
+	Sleep(1000);
+}
+
+//Ermittlung des Gewinners
+void UI::SiegerEhrung(const int sieger, Spieler* spieler1, Spieler* spieler2)		
 {
 	SetCursorPosition(1, 4 * KARTE_HOEHE-3);
 	switch (sieger)
@@ -127,7 +150,8 @@ void UI::SiegerEhrung(int sieger, Spieler* spieler1, Spieler* spieler2)		//Ermit
 	}
 }
 
-int UI::AuswahlReiheNehmen(Spielfeld * spielfeld)			//Auswahl der Reihe die genommen werden soll
+//Auswahl der Reihe die genommen werden soll
+int UI::AuswahlReiheNehmen(Spielfeld * spielfeld)			
 {
 	int c;
 	bool endlos = true;
@@ -165,7 +189,8 @@ int UI::AuswahlReiheNehmen(Spielfeld * spielfeld)			//Auswahl der Reihe die geno
 	return gewaehlteReihe;
 }
 
-int UI::IstSpielerMensch()			//Abfrage ob man selber als Spieler agieren will
+//Abfrage ob man selber als Spieler agieren will
+int UI::IstSpielerMensch()			
 {
 	int rueckgabe = 0;
 
@@ -181,25 +206,25 @@ int UI::IstSpielerMensch()			//Abfrage ob man selber als Spieler agieren will
 }
 
 /* die Methode zeichnet die Karte an der angegebenen Koordinaten */
-void UI::karte_zeichnen(Karte karte, short x, short y, bool gewaehlt)
+void UI::Karte_Zeichnen(Karte karte, const short x, const short y, bool gewaehlt)
 {
 	/* Setzten die Basisfarbe */
 	int basisfarbe = 0x0F;      //weiss auf schwarzem Hindergrund
 	int straffarbe;
 
-	int strafpunkte = karte.getStrafpunkte();
+	int strafpunkte = karte.GetStrafpunkte();
 
 	if (gewaehlt) basisfarbe = 0xF0;  //schwarz auf weissem Hindergrund
 
 	SetTextColor(basisfarbe);
 
 	/* Zeichne die Umrisse von Karte */
-	zeichnen_linie(x, y, '+', '-', '+', 1);
-	zeichnen_linie(x, y + 1, '|' , ' ', '|', KARTE_HOEHE - 3);
-	zeichnen_linie(x, y + KARTE_HOEHE - 2, '+', '-', '+', 1);
+	Zeichnen_Linie(x, y, '+', '-', '+', 1);
+	Zeichnen_Linie(x, y + 1, '|' , ' ', '|', KARTE_HOEHE - 3);
+	Zeichnen_Linie(x, y + KARTE_HOEHE - 2, '+', '-', '+', 1);
 
 	/* Nummern aud der Karte in alle vier Ecken ausgeben */
-	zeichnen_kartennummer(x, y, karte.getZahl());
+	Zeichnen_Kartennummer(x, y, karte.GetZahl());
 
 	/* Strafpunkte auf der Karte ausgeben */
 	straffarbe = farben[strafpunkte - 1];
@@ -214,16 +239,16 @@ void UI::karte_zeichnen(Karte karte, short x, short y, bool gewaehlt)
 	}
 
 	SetTextColor(straffarbe);
-	zeichnen_strafpunkte(x, y, strafpunkte);
+	Zeichnen_Strafpunkte(x, y, strafpunkte);
 	SetTextColor(basisfarbe);
 
 	/* zeichne den Ochsenkopf */
-	zeichne_kopf(x + KARTE_BREITE / 2 - 3, y + KARTE_HOEHE / 2 - 1);
+	Zeichne_Kopf(x + KARTE_BREITE / 2 - 3, y + KARTE_HOEHE / 2 - 1);
 
 	SetTextColor(farben[0]);
 }
 
-void UI::zeichnen_linie(short xl, short yl, char char1, char char2, char char3, int wiederholen)
+void UI::Zeichnen_Linie(const short xl, const short yl, char char1, char char2, char char3, const int wiederholen)
 {
 	for (int j = 0; j < wiederholen; j++)
 	{
@@ -234,14 +259,14 @@ void UI::zeichnen_linie(short xl, short yl, char char1, char char2, char char3, 
 	}
 }
 
-void UI::zeichne_kopf(short xk, short yk)
+void UI::Zeichne_Kopf(const short xk, short yk)
 {
 	SetCursorPosition(xk, yk++); printf("/_  _\\");
 	SetCursorPosition(xk, yk++); printf("  ||");
 	SetCursorPosition(xk, yk);   printf(" (__)");
 }
 
-void UI::zeichnen_kartennummer(short xm1, short ym1, int zahl)
+void UI::Zeichnen_Kartennummer(short xm1, short ym1, const int zahl)
 {
 	short xm2;
 	short ym2;
@@ -264,7 +289,7 @@ void UI::zeichnen_kartennummer(short xm1, short ym1, int zahl)
 	printf("%3d", zahl);
 }
 
-void UI::zeichnen_strafpunkte(short xp, short yp, int punkte)
+void UI::Zeichnen_Strafpunkte(const short xp, const short yp, const int punkte)
 {
 	int straf_linies;
 
@@ -283,7 +308,7 @@ void UI::zeichnen_strafpunkte(short xp, short yp, int punkte)
 	}
 }
 
-void UI::SetCursorPosition(short x, short y)
+void UI::SetCursorPosition(const short x, const short y)
 {
 	static const HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	std::cout.flush();
@@ -291,7 +316,7 @@ void UI::SetCursorPosition(short x, short y)
 	SetConsoleCursorPosition(hOut, coord);
 }
 
-void UI::SetTextColor(int col)
+void UI::SetTextColor(const int col)
 {
 	static const HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	FlushConsoleInputBuffer(hOut);

@@ -20,13 +20,13 @@ void Bot::AusgewaehlteReiheNehmen(Spielfeld* spielfeld)
 int Bot::ErmittlungMin(Spielfeld* spielfeld)
 {
 	int spalte = 0;
-	int min = spielfeld->getStrafpunkte(0);
+	int min = spielfeld->GetStrafpunkte(0);
 
 	for (int i = 1; i < 4; i++)
 	{
-		if (min > spielfeld->getStrafpunkte(i))
+		if (min > spielfeld->GetStrafpunkte(i))
 		{
-			min = spielfeld->getStrafpunkte(i);
+			min = spielfeld->GetStrafpunkte(i);
 			spalte = i;
 		}
 	}

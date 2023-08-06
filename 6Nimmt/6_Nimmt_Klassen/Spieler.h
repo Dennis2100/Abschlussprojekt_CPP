@@ -8,24 +8,26 @@ class Spieler
 
 public:
 	Spieler();																	//Standardkonstruktor
+	~Spieler();
 
-	void SetPunktestand(int punktestand);										//Strafpunkte setzen
+	void SetPunktestand(const int punktestand);									//Strafpunkte setzen
 	int GetPunktestand();														//Strafpunkte ausgeben
-	void SetHandkarteBeiIndex(int index, Karte karte);							//Eine Handkarte beim angegebenen Index setzen
-	Karte LegeHandkarte(int index);												//Die gelegte karte wird ausgegeben und danach aus den Handkarten gelöscht
-	void LöscheGelegteHandkarte(int index);										//Methode zum Löschen der gelegten Handkarte
+	void SetHandkarteBeiIndex(const int index, Karte karte);					//Eine Handkarte beim angegebenen Index setzen
+	Karte LegeHandkarte(const int index);										//Die gelegte karte wird ausgegeben und danach aus den Handkarten gelöscht
+	void LoescheGelegteHandkarte(const int index);								//Methode zum Löschen der gelegten Handkarte
 	int GetHandkartenIndexLaenge();												//Ausgabe der Anzahl der noch Vorhandenen Handkarten 
-	Karte GetHandkarteBeiIndex(int index);										//Gibt die Handkarte am angegebenen Index aus
+	Karte* GetHandkarten();														//Gibt die Handkarten des Spielers zurück
+	Karte GetHandkarteBeiIndex(const int index);								//Gibt die Handkarte am angegebenen Index aus
 	void SetGesetzteKarte(Karte karte);											//Setzt die vom Spieler geseztze Karte (Variable gesetzteKarte)
 	Karte GetGesetzteKarte();													//Gibt die gesetzte Karte aus
 	std::string GetName();														//Gibt den Namen des Spielers zurück
 
-	void ReiheNimmt(int spalte, Spielfeld * spielfeld);							//Die Reihe wird genommen, die Strafpunkte für den Spieler werden berechnet, erste Karte wird zur gesetzten Karte des Spielers
+	void ReiheNimmt(const int spalte, Spielfeld * spielfeld);					//Die Reihe wird genommen, die Strafpunkte für den Spieler werden berechnet, erste Karte wird zur gesetzten Karte des Spielers
 
 	void SortierenHandkarten();													//Sortiert die Handkarten des Spielers
 	void HeapSort();															//
-	void Heapify(int index, int root);											//	Gewähltes Sortierverfahren, da komplexität immer gleich
-	void SwapHandkarten(int index1, int index2);								//
+	void Heapify(const int index, const int root);								//	Gewähltes Sortierverfahren
+	void SwapHandkarten(const int index1, const int index2);					//
 
 	virtual Karte MachZug(Spielfeld * spielfeld) abstract;						//Spieler macht einen Zug	
 	virtual void AusgewaehlteReiheNehmen(Spielfeld * spielfeld) abstract;		//Nimmt die Ausgewählte Reihe, berechnet Strafpunkte, Setzt ertse Karte der Spalte
@@ -34,7 +36,7 @@ protected:
 	std::string name;
 	Karte handkarten[10];
 	int punktestand = 0;
-	int längeHandkartenIndex = 10;
+	int laengeHandkartenIndex = 10;
 	Karte gesetzteKarte;
 };
 

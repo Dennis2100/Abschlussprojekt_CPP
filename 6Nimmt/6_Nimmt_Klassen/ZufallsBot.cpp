@@ -7,17 +7,19 @@ ZufallsBot::ZufallsBot()
 	name = "Zufallsbot";
 }
 
-Karte ZufallsBot::MachZug(Spielfeld * spielfeld)				//Macht einen zufälligen Zug
+//Macht einen zufälligen Zug
+Karte ZufallsBot::MachZug(Spielfeld * spielfeld)				
 {
 	srand((unsigned int)time(NULL));
-	int random = rand() % längeHandkartenIndex; //0 bis längeHandkartenIndex-1
+	int random = rand() % laengeHandkartenIndex; //0 bis längeHandkartenIndex-1
 
 	SetGesetzteKarte(handkarten[random]);
 
 	return LegeHandkarte(random);
 }
 
-void ZufallsBot::AusgewaehlteReiheNehmen(Spielfeld* spielfeld)	//Nimmt eine zufällige Reihe
+//Nimmt eine zufällige Reihe
+void ZufallsBot::AusgewaehlteReiheNehmen(Spielfeld* spielfeld)	
 {
 	srand((unsigned int)time(NULL));
 	int random = rand() % 4; //0 bis 3

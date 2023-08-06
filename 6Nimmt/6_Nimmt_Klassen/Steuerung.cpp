@@ -17,7 +17,11 @@ Steuerung::Steuerung()
 {
 }
 
-int Steuerung::StarteSpiel(int istSpielerMensch, int botWahl1, int botWahl2, bool konsolenausgabe,int seek)
+Steuerung::~Steuerung()
+{
+}
+
+int Steuerung::StarteSpiel(const int istSpielerMensch, const int botWahl1, const int botWahl2, bool konsolenausgabe, const int seek)
 {
 	UI ui;
 	int sieger;
@@ -66,39 +70,44 @@ int Steuerung::StarteSpiel(int istSpielerMensch, int botWahl1, int botWahl2, boo
 		gewaelteKarte1 = spieler1->GetGesetzteKarte();					//Gewählte Karte wird zugewiesen
 		gewaelteKarte2 = spieler2->GetGesetzteKarte();					//
 
+		if (konsolenausgabe) ui.ZeigeZug(spieler1, spieler2);
+
 		WerDarfAnfangen(gewaelteKarte1, gewaelteKarte2, spielfeld, spieler1, spieler2);	//Ermittlung wer anfangen darf
 	}
+
+	sieger = SiegerBestimmung(spieler1, spieler2);						//Der Sieger wird bestimmt
 
 	if (konsolenausgabe)												//Erneute Unterdrückung der Konsolenausgabe um die Tests zu beschleunigen
 	{
 	    ui.ScreenLoeschen();											//Löschen der aktuellen Ausgabe
 	    ui.AusgabeSpielfeld(spielfeld, 5);								//Ausgabe des Spielfelds
 	    ui.SpielerStand(spieler1, spieler2);							//Ausgabe des Spielerstands
-    }
-
-	sieger = SiegerBestimmung(spieler1, spieler2);						//Der Sieger wird bestimmt
-
-	if (konsolenausgabe)												//Erneute Unterdrückung der Konsolenausgabe um die Tests zu beschleunigen
-	{
-		ui.SiegerEhrung(sieger, spieler1, spieler2);					//Ausgabe des Siegers
-		std::cin.get();
+    	ui.SiegerEhrung(sieger, spieler1, spieler2);					//Ausgabe des Siegers
+		(void)getchar();
 	}
-	return sieger;														//Gewinner wird ermittelt
+	
+	/* Loeschen von Objekten */
+	delete (spieler1);
+	delete (spieler2);
+	delete (deck);
+	delete (spielfeld);
 
+	return sieger;														//Gewinner wird ermittelt
 }
 
-void Steuerung::GebenHandkarten(Deck * deck, Spieler * spieler)								//Verteilen der Handkarten
+//Verteilen der Handkarten
+void Steuerung::GebenHandkarten(Deck * deck, Spieler * spieler)								
 {
 	for (int i = 0; i < 10; i++)
 	{
 		spieler->SetHandkarteBeiIndex(i, deck->Dealer());
 	}
 
-	spieler->SortierenHandkarten();															//Handkarten werden Sortiert
+	spieler->SortierenHandkarten();										//Handkarten werden Sortiert
 }
 
-
-void Steuerung::ErstenVier(Spielfeld * spielfeld, Deck  * deck)								//Einsetzen der ersten 4 Karten auf das Spielfeld
+//Einsetzen der ersten 4 Karten auf das Spielfeld
+void Steuerung::ErstenVier(Spielfeld * spielfeld, Deck  * deck)								
 {
 	for(int i = 0; i < 4; i++)
 	{
@@ -106,9 +115,10 @@ void Steuerung::ErstenVier(Spielfeld * spielfeld, Deck  * deck)								//Einsetz
 	}
 }
 
+//Wer darf als erster legen
 void Steuerung::WerDarfAnfangen(Karte gewaelteKarte1, Karte gewaelteKarte2, Spielfeld* spielfeld, Spieler* spieler1, Spieler* spieler2)
 {
-	if (gewaelteKarte1.getZahl() < gewaelteKarte2.getZahl())								//Wer darf als erster legen
+	if (gewaelteKarte1.GetZahl() < gewaelteKarte2.GetZahl())								
 	{
 		spielerLegtKarten(spielfeld, spieler1, gewaelteKarte1);
 		spielerLegtKarten(spielfeld, spieler2, gewaelteKarte2);
@@ -120,7 +130,8 @@ void Steuerung::WerDarfAnfangen(Karte gewaelteKarte1, Karte gewaelteKarte2, Spie
 	}
 }
 
-void Steuerung::spielerLegtKarten(Spielfeld * spielfeld,Spieler * spieler, Karte karte)		//Spieler legt eine Karte auf das Spielfeld
+/* Spieler legt eine Karte auf das Spielfeld */
+void Steuerung::spielerLegtKarten(Spielfeld * spielfeld,Spieler * spieler, Karte karte)		
 {
 	int rueckgabe;
 	
@@ -145,7 +156,8 @@ void Steuerung::spielerLegtKarten(Spielfeld * spielfeld,Spieler * spieler, Karte
 
 }
 
-int Steuerung::SiegerBestimmung(Spieler* spieler1, Spieler* spieler2)						//Ermittlung des Gewinners
+//Ermittlung des Gewinners
+int Steuerung::SiegerBestimmung(Spieler* spieler1, Spieler* spieler2)						
 {
 	if (spieler1->GetPunktestand() < spieler2->GetPunktestand())
 	{
@@ -161,7 +173,8 @@ int Steuerung::SiegerBestimmung(Spieler* spieler1, Spieler* spieler2)						//Erm
 	}
 }
 
-Spieler* Steuerung::BotWahl(int nummer)														//Zuweisung des Ausgewählten Bots
+//Zuweisung des Ausgewählten Bots
+Spieler* Steuerung::BotWahl(const int nummer)														
 {
 	switch (nummer)
 	{

@@ -7,7 +7,8 @@ LowCardBot::LowCardBot()
     name = "LowCardBot";
 }
 
-Karte LowCardBot::MachZug(Spielfeld * spielfeld)    //LowCardBot macht einen Zug
+//LowCardBot macht einen Zug
+Karte LowCardBot::MachZug(Spielfeld * spielfeld)    
 {
     SetGesetzteKarte(handkarten[0]);                //
                                                     //Setzt die Niedrigste Karte auf der Hand
