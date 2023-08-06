@@ -6,6 +6,10 @@ Bot::Bot()
 
 }
 
+Bot::~Bot()
+{
+}
+
 /* Nimmt die ausgewählte Reihe */
 void Bot::AusgewaehlteReiheNehmen(Spielfeld* spielfeld)
 {

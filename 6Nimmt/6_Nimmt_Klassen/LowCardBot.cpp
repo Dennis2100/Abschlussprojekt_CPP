@@ -7,6 +7,10 @@ LowCardBot::LowCardBot()
     name = "LowCardBot";
 }
 
+LowCardBot::~LowCardBot()
+{
+}
+
 //LowCardBot macht einen Zug
 Karte LowCardBot::MachZug(Spielfeld * spielfeld)    
 {

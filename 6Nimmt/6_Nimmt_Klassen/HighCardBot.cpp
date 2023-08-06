@@ -7,6 +7,10 @@ HighCardBot::HighCardBot()
 	name = "HighCardBot";
 }
 
+HighCardBot::~HighCardBot()
+{
+}
+
 //HighCardBot macht einen Zug
 Karte HighCardBot::MachZug(Spielfeld * spielfeld)		
 {

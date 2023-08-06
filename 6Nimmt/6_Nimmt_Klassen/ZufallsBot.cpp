@@ -7,6 +7,10 @@ ZufallsBot::ZufallsBot()
 	name = "Zufallsbot";
 }
 
+ZufallsBot::~ZufallsBot()
+{
+}
+
 //Macht einen zufälligen Zug
 Karte ZufallsBot::MachZug(Spielfeld * spielfeld)				
 {

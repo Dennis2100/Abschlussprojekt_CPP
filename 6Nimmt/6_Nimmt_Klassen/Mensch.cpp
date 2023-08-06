@@ -8,6 +8,10 @@ Mensch::Mensch()
 	name = "Mensch";
 }
 
+Mensch::~Mensch()
+{
+}
+
 //Mensch macht einen Zug
 Karte Mensch::MachZug(Spielfeld * spielfeld)						
 {

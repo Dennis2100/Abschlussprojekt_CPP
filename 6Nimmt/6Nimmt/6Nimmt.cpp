@@ -1,3 +1,5 @@
+/* Name: Dennis Melnychuk, Matrikelnummer: 4240524 */
+
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
@@ -7,7 +9,6 @@
 
 int main()
 {
-    
     Steuerung steuerung;
     UI ui;
 

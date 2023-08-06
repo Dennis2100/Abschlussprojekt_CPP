@@ -21,7 +21,7 @@ UI::~UI()
 
 void UI::ScreenVorbereiten()
 {
-	system("mode con COLS=200 LINES=300");
+	system("mode con COLS=200 LINES=80");
 	//::ShowWindow(GetConsoleWindow(), SW_MAXIMIZE);
 	//::SendMessage(::GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000);
 	ScreenLoeschen();
@@ -75,7 +75,7 @@ void UI::AusgabeHandkarten(Karte * handkarten, const int laengeHandkartenIndex, 
 {
 	for (short i = 0; i < laengeHandkartenIndex; i++)
 	{
-	 	Karte_Zeichnen(handkarten[i], 5 + (i+1) * KARTE_BREITE, 4*KARTE_HOEHE-1,(i == gewaehlteKarte));
+	 	Karte_Zeichnen(handkarten[i], 5 + (i+1) * KARTE_BREITE, 4*KARTE_HOEHE - 1,(i == gewaehlteKarte));
 	}
 
 	for (short j = laengeHandkartenIndex; j < 10; j++)
@@ -94,7 +94,7 @@ int UI::EingabeKarte(Karte* handkarten, const int laengeHandkartenIndex)
 	int gewaehlteKarte = 0;
 
 	SetCursorPosition(1, 4 * KARTE_HOEHE - 3);
-    std::cout << "                                 Waehlen Sie mit den Pfeiltasten eine Karte zum legen:                      ";
+    std::cout << "                                 Waehlen Sie mit den Pfeiltasten eine Karte zum legen und druecken Sie ENTER:                      ";
 	
 	while (endlos)
 	{
@@ -159,7 +159,7 @@ int UI::AuswahlReiheNehmen(Spielfeld * spielfeld)
 	
 
 	SetCursorPosition(1, 4 * KARTE_HOEHE - 3);
-	std::cout << "                                 Welche Reihe soll genommen werden:                                  ";
+	std::cout << "                            Waehlen Sie die Reihe, die genommen wird mit Pfeiltasten und druecken Sie ENTER: :                                  ";
 
 	while (endlos)
 	{

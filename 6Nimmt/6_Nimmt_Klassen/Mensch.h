@@ -7,6 +7,7 @@ class Mensch : public Spieler
 
 public :
 	Mensch();														//Standardkonstruktor
+	~Mensch();
 
 	Karte MachZug(Spielfeld * spielfeld) override;					//Macht einen Zug
 	void AusgewaehlteReiheNehmen(Spielfeld* spielfeld) override;	//Nimmt die ausgewählte Reihe nehmen

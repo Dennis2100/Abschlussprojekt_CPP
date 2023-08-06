@@ -5,6 +5,7 @@ class Deck
 
 public:
 	Deck();										//Standart-Konstruktor
+	~Deck();
 
 	Karte Dealer();								//Gibt eine Zufällige Karte aus den noch vorhandenen Karten im Deck zurück
 	void KarteAusDeckLöschen(const int index);  //Löscht eine Karte aus dem Deck

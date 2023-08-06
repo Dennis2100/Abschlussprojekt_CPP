@@ -13,6 +13,10 @@ Deck::Deck()
 	deckLänge = 104;
 }
 
+Deck::~Deck()
+{
+}
+
 //Hilft dabei eine Zufällige Zahl zu generieren
 void Deck::SetRandomizer(const int seek)		
 {

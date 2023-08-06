@@ -7,6 +7,7 @@ class Bot : public Spieler
 
 public: 
 	Bot();																	//Standardkonstuktor
+	~Bot();
 
 	virtual Karte MachZug(Spielfeld * spielfeld) abstract;					//Bot macht einen Zug
 	virtual void AusgewaehlteReiheNehmen(Spielfeld* spielfeld) override;	//Nur override von Spieler, gleiche Funktionalität

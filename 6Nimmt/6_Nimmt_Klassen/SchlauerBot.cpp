@@ -7,6 +7,10 @@ SchlauerBot::SchlauerBot()
     name = "Schlauerbot";
 }
 
+SchlauerBot::~SchlauerBot()
+{
+}
+
 //Zufallsbot macht einen Zug
 Karte SchlauerBot::MachZug(Spielfeld * spielfeld)               
 {
