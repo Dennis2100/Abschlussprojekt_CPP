@@ -1,0 +1,147 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.36.32537.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/dhbw_informationstechnik_2022/c++/abschlussprojekt/6nimmt/6_nimmt_klassen/steuerung.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "f2809607218a8aad28db7e97b512096565e94b23bc6816b044c74b404633699a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dhbw_informationstechnik_2022/c++/abschlussprojekt/6nimmt/6_nimmt_klassen/pch.h"
+          },
+          "hashes": {
+            "sha-256": "452c244afab5460b7deda121e284aeacfa412755f3ae61119565ea6ba313019b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dhbw_informationstechnik_2022/c++/abschlussprojekt/6nimmt/6_nimmt_klassen/framework.h"
+          },
+          "hashes": {
+            "sha-256": "55198cfcb0c6a467744f4fe1be927388fe82432c389051a9e9f6bca3375fe3fa"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dhbw_informationstechnik_2022/c++/abschlussprojekt/6nimmt/6_nimmt_klassen/steuerung.h"
+          },
+          "hashes": {
+            "sha-256": "859982e37723ed22ce8aafadd429c32272e7f828093d2c6c010e5f0ce6580e5d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dhbw_informationstechnik_2022/c++/abschlussprojekt/6nimmt/6_nimmt_klassen/spielfeld.h"
+          },
+          "hashes": {
+            "sha-256": "b952b0f10c04cf8c433750a1db1eee909db08dd3ad4a4be465b25fc3e2dd3847"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dhbw_informationstechnik_2022/c++/abschlussprojekt/6nimmt/6_nimmt_klassen/karte.h"
+          },
+          "hashes": {
+            "sha-256": "de3b8d60170bb13085c6c410185044a5273dbbe45eacdced6f14c027a3f1c263"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dhbw_informationstechnik_2022/c++/abschlussprojekt/6nimmt/6_nimmt_klassen/deck.h"
+          },
+          "hashes": {
+            "sha-256": "49c784b155d734bab9683901eac012c98f628436a09d43092e7285757470d8b7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dhbw_informationstechnik_2022/c++/abschlussprojekt/6nimmt/6_nimmt_klassen/bot.h"
+          },
+          "hashes": {
+            "sha-256": "7b11ff413339506002149b0693b8891637e05785995c85e37f481cfbd0c27868"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dhbw_informationstechnik_2022/c++/abschlussprojekt/6nimmt/6_nimmt_klassen/spieler.h"
+          },
+          "hashes": {
+            "sha-256": "4a3a324f092940d1b47b3010ef1a0a318795b61f58e8bd058773e64439b467ed"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dhbw_informationstechnik_2022/c++/abschlussprojekt/6nimmt/6_nimmt_klassen/mensch.h"
+          },
+          "hashes": {
+            "sha-256": "e757c39f63220dbc5ac7ab3f0a0165a12431887c9d1b60f80b86a4fe69dc9c67"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dhbw_informationstechnik_2022/c++/abschlussprojekt/6nimmt/6_nimmt_klassen/ui.h"
+          },
+          "hashes": {
+            "sha-256": "d0d1bae50c81cee9ab6357afc86f5d4a051be51e3889daf1ae2401c227cac54a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dhbw_informationstechnik_2022/c++/abschlussprojekt/6nimmt/6_nimmt_klassen/schlauerbot.h"
+          },
+          "hashes": {
+            "sha-256": "c399ea9b96fde7e0eadc3756456742f1a1748169b9855aec11f8f34e9edab200"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dhbw_informationstechnik_2022/c++/abschlussprojekt/6nimmt/6_nimmt_klassen/zufallsbot.h"
+          },
+          "hashes": {
+            "sha-256": "dcf77f3974db04c6580108cc5353fc90b13b0f5d3ea389effa532fd639ecb58c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dhbw_informationstechnik_2022/c++/abschlussprojekt/6nimmt/6_nimmt_klassen/lowcardbot.h"
+          },
+          "hashes": {
+            "sha-256": "8e8bc81efd33bad7f0950015003e74f8bbc5fc829ab6107d85c3bcd21d750848"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dhbw_informationstechnik_2022/c++/abschlussprojekt/6nimmt/6_nimmt_klassen/highcardbot.h"
+          },
+          "hashes": {
+            "sha-256": "c87673852abd1d979004bcff5ce02934b730e95282dd7354dca90ab68c8b1396"
+          }
+        }
+      ]
+    }
+  ]
+}

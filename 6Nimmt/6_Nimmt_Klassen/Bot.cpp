@@ -6,13 +6,14 @@ Bot::Bot()
 
 }
 
+/* Nimmt die ausgewählte Reihe */
 void Bot::AusgewaehlteReiheNehmen(Spielfeld* spielfeld)
 {
 	int spalte = 0;
 
-	spalte = ErmittlungMin(spielfeld);
+	spalte = ErmittlungMin(spielfeld);		//Ermittelt die zu Nehmende Reihe
 
-	ReiheNimmt(spalte, spielfeld);
+	ReiheNimmt(spalte, spielfeld);			//Reihe wird genommen
 }
 
 /* findet Reihe mit minimalen Strafpunkten */
@@ -30,5 +31,5 @@ int Bot::ErmittlungMin(Spielfeld* spielfeld)
 		}
 	}
 
-	return spalte;
+	return spalte;							//Rückgabe der Spalte mit den geringesten Strafpunkten
 }

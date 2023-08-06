@@ -75,9 +75,6 @@
     <ClInclude Include="Karte.h">
       <Filter>Headerdateien\Deck</Filter>
     </ClInclude>
-    <ClInclude Include="KonsolenOperation.h">
-      <Filter>Headerdateien\Deck</Filter>
-    </ClInclude>
     <ClInclude Include="LowCardBot.h">
       <Filter>Headerdateien\Spieler\Bots</Filter>
     </ClInclude>
@@ -120,9 +117,6 @@
       <Filter>Quelldateien\Deck</Filter>
     </ClCompile>
     <ClCompile Include="Karte.cpp">
-      <Filter>Quelldateien\Deck</Filter>
-    </ClCompile>
-    <ClCompile Include="KonsolenOperation.cpp">
       <Filter>Quelldateien\Deck</Filter>
     </ClCompile>
     <ClCompile Include="LowCardBot.cpp">

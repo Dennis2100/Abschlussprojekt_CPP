@@ -1,18 +1,5 @@
-﻿  Bot.cpp
-  Deck.cpp
-  HighCardBot.cpp
-  Karte.cpp
-  KonsolenOperation.cpp
-C:\DHBW_Informationstechnik_2022\C++\Abschlussprojekt\6Nimmt\6_Nimmt_Klassen\KonsolenOperation.cpp(8,18): warning C4838: Konvertierung von "int" zu "SHORT" erfordert eine einschränkende Konvertierung
-C:\DHBW_Informationstechnik_2022\C++\Abschlussprojekt\6Nimmt\6_Nimmt_Klassen\KonsolenOperation.cpp(8,21): warning C4838: Konvertierung von "int" zu "SHORT" erfordert eine einschränkende Konvertierung
-  LowCardBot.cpp
-  Mensch.cpp
-  SchlauerBot.cpp
-  Spieler.cpp
-  Spielfeld.cpp
+﻿  Mensch.cpp
   Steuerung.cpp
   UI.cpp
-  ZufallsBot.cpp
   Code wird generiert...
-C:\DHBW_Informationstechnik_2022\C++\Abschlussprojekt\6Nimmt\6_Nimmt_Klassen\Steuerung.cpp(184): warning C4715: "Steuerung::BotWahl": Nicht alle Codepfade geben einen Wert zurück.
   6_Nimmt_Klassen.vcxproj -> C:\DHBW_Informationstechnik_2022\C++\Abschlussprojekt\6Nimmt\x64\Debug\6_Nimmt_Klassen.lib

@@ -29,7 +29,7 @@ int Steuerung::StarteSpiel(int istSpielerMensch, int botWahl1, int botWahl2, boo
 	Spieler* spieler1 = NULL;
 	Spieler* spieler2 = NULL;
 
-	if (istSpielerMensch == 1)
+	if (istSpielerMensch == 1)											//Initialisierung der Spieler 
 	{
 		spieler1 = new Mensch();
 
@@ -44,59 +44,61 @@ int Steuerung::StarteSpiel(int istSpielerMensch, int botWahl1, int botWahl2, boo
 	Karte gewaelteKarte1;												//Gewählte Karte von Spieler1
 	Karte gewaelteKarte2;												//Gewählte Karte von Spieler2
 
-	ErstenVier(spielfeld, deck);
+	ErstenVier(spielfeld, deck);										//Zuweisung der ersten vier Karten 
+				
+	GebenHandkarten(deck, spieler1);									//Zuweisung der Handkarten
+	GebenHandkarten(deck, spieler2);									//Zuweisung der Handkarten
 
-	GebenHandkarten(deck, spieler1);
-	GebenHandkarten(deck, spieler2);
-
-	if (konsolenausgabe) ui.ScreenVorbereiten();
+	if (konsolenausgabe) ui.ScreenVorbereiten();						//Die Konsolenausgabe wird vorbereitet
 
 	for (int i = 0; i < 10; i++)										//Ablauf des Spiels á 10 Runden
 	{
-		if (konsolenausgabe)   //Unterdrückung der Konsolenausgabe um die Tests zu beschleunigen
+		if (konsolenausgabe)											//Unterdrückung der Konsolenausgabe um die Tests zu beschleunigen
 		{
-			ui.ScreenLoeschen();
-			ui.AusgabeSpielfeld(spielfeld, 5);
-			ui.SpielerStand(spieler1, spieler2);
+			ui.ScreenLoeschen();										//Löschen der aktuellen Ausgabe
+			ui.AusgabeSpielfeld(spielfeld, 5);							//Ausgabe des Spielfelds
+			ui.SpielerStand(spieler1, spieler2);						//Ausgabe des Spielerstands
 		}
 
-		spieler1->MachZug(spielfeld);
-		spieler2->MachZug(spielfeld);
+		spieler1->MachZug(spielfeld);									//Spieler macht einen Zug
+		spieler2->MachZug(spielfeld);									//
 
-		gewaelteKarte1 = spieler1->GetGesetzteKarte();
-		gewaelteKarte2 = spieler2->GetGesetzteKarte();
+		gewaelteKarte1 = spieler1->GetGesetzteKarte();					//Gewählte Karte wird zugewiesen
+		gewaelteKarte2 = spieler2->GetGesetzteKarte();					//
 
-		WerDarfAnfangen(gewaelteKarte1, gewaelteKarte2, spielfeld, spieler1, spieler2);
+		WerDarfAnfangen(gewaelteKarte1, gewaelteKarte2, spielfeld, spieler1, spieler2);	//Ermittlung wer anfangen darf
 	}
 
-	if (konsolenausgabe)
+	if (konsolenausgabe)												//Erneute Unterdrückung der Konsolenausgabe um die Tests zu beschleunigen
 	{
-	    ui.ScreenLoeschen();
-	    ui.AusgabeSpielfeld(spielfeld, 5);
-	    ui.SpielerStand(spieler1, spieler2);
+	    ui.ScreenLoeschen();											//Löschen der aktuellen Ausgabe
+	    ui.AusgabeSpielfeld(spielfeld, 5);								//Ausgabe des Spielfelds
+	    ui.SpielerStand(spieler1, spieler2);							//Ausgabe des Spielerstands
     }
 
-	sieger = SiegerBestimmung(spieler1, spieler2);
-	if (konsolenausgabe)
+	sieger = SiegerBestimmung(spieler1, spieler2);						//Der Sieger wird bestimmt
+
+	if (konsolenausgabe)												//Erneute Unterdrückung der Konsolenausgabe um die Tests zu beschleunigen
 	{
-		ui.SiegerEhrung(sieger, spieler1, spieler2);
+		ui.SiegerEhrung(sieger, spieler1, spieler2);					//Ausgabe des Siegers
 		std::cin.get();
 	}
-	return sieger;								//Gewinner wird ermittelt
+	return sieger;														//Gewinner wird ermittelt
 
 }
 
-void Steuerung::GebenHandkarten(Deck * deck, Spieler * spieler)	//Verteilen der Handkarten
+void Steuerung::GebenHandkarten(Deck * deck, Spieler * spieler)								//Verteilen der Handkarten
 {
 	for (int i = 0; i < 10; i++)
 	{
 		spieler->SetHandkarteBeiIndex(i, deck->Dealer());
 	}
-	spieler->SortierenHandkarten();
+
+	spieler->SortierenHandkarten();															//Handkarten werden Sortiert
 }
 
 
-void Steuerung::ErstenVier(Spielfeld * spielfeld, Deck  * deck)							//Einsetzen der ersten 4 Karten auf das Spielfeld
+void Steuerung::ErstenVier(Spielfeld * spielfeld, Deck  * deck)								//Einsetzen der ersten 4 Karten auf das Spielfeld
 {
 	for(int i = 0; i < 4; i++)
 	{
@@ -106,7 +108,7 @@ void Steuerung::ErstenVier(Spielfeld * spielfeld, Deck  * deck)							//Einsetze
 
 void Steuerung::WerDarfAnfangen(Karte gewaelteKarte1, Karte gewaelteKarte2, Spielfeld* spielfeld, Spieler* spieler1, Spieler* spieler2)
 {
-	if (gewaelteKarte1.getZahl() < gewaelteKarte2.getZahl())							//Wer darf als erster legen
+	if (gewaelteKarte1.getZahl() < gewaelteKarte2.getZahl())								//Wer darf als erster legen
 	{
 		spielerLegtKarten(spielfeld, spieler1, gewaelteKarte1);
 		spielerLegtKarten(spielfeld, spieler2, gewaelteKarte2);
@@ -118,31 +120,32 @@ void Steuerung::WerDarfAnfangen(Karte gewaelteKarte1, Karte gewaelteKarte2, Spie
 	}
 }
 
-void Steuerung::spielerLegtKarten(Spielfeld * spielfeld,Spieler * spieler, Karte karte)
+void Steuerung::spielerLegtKarten(Spielfeld * spielfeld,Spieler * spieler, Karte karte)		//Spieler legt eine Karte auf das Spielfeld
 {
 	int rueckgabe;
 	
 	rueckgabe = spielfeld->KarteLegen(karte);
+
 	switch (rueckgabe)
 	{
-	case 4:
-		//Reihe wählen
-		spieler->AusgewaehlteReiheNehmen(spielfeld);
-		break;
+		case 4:
+			//Reihe wählen
+			spieler->AusgewaehlteReiheNehmen(spielfeld);
+			break;
 
-	case 5:
-		//Kart angenommen, keine weitere Aktion erforderlich
-		break;
+		case 5:
+			//Kart angenommen, keine weitere Aktion erforderlich
+			break;
 
-	default:
-		//Ganze Reihe nehmen, rueckgabe = 0..3
-		spieler->ReiheNimmt(rueckgabe, spielfeld);
-		break;
+		default:
+			//Ganze Reihe nehmen, rueckgabe = 0..3
+			spieler->ReiheNimmt(rueckgabe, spielfeld);
+			break;
 	}
 
 }
 
-int Steuerung::SiegerBestimmung(Spieler* spieler1, Spieler* spieler2)		//Ermittlung des Gewinners
+int Steuerung::SiegerBestimmung(Spieler* spieler1, Spieler* spieler2)						//Ermittlung des Gewinners
 {
 	if (spieler1->GetPunktestand() < spieler2->GetPunktestand())
 	{
@@ -158,9 +161,9 @@ int Steuerung::SiegerBestimmung(Spieler* spieler1, Spieler* spieler2)		//Ermittl
 	}
 }
 
-Spieler* Steuerung::BotWahl(int nummer)
+Spieler* Steuerung::BotWahl(int nummer)														//Zuweisung des Ausgewählten Bots
 {
-	switch (nummer)																		//Zuweisung des Ausgewählten Bots
+	switch (nummer)
 	{
 		case 1:
 			return new SchlauerBot();
@@ -179,6 +182,7 @@ Spieler* Steuerung::BotWahl(int nummer)
 			break;
 
 		default:
+			return new ZufallsBot(); 
 			break;
 	}
 }

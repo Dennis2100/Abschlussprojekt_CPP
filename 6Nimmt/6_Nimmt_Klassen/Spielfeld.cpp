@@ -12,7 +12,7 @@ Karte Spielfeld::GetSpielfeld(int reihe, int spalte)
 	return spielfeld[reihe][spalte];
 }
 
-Karte Spielfeld::GetLetzteKarte(int reihe)
+Karte Spielfeld::GetLetzteKarte(int reihe)		//Gibt die letzte Karte einer Reihe zurück
 {
 	return spielfeld[reihe][kartenzahl[reihe]];
 }
@@ -28,7 +28,7 @@ void Spielfeld::SetSpielfeld(int reihe, int spalte, Karte karte)
 	 4 - die Karte ist kleiner als die letzten Karten in allen Reihen, es muss gewählt werden welche Reihe wird genommen
 	 5 - die Karte angenommen, keine Interaktion erforderlich */
 
-int Spielfeld::KarteLegen(Karte karte)
+int Spielfeld::KarteLegen(Karte karte)		//Ermittelt ob eine Karte ohne weiteres gelegt werden kann
 {
 	int diff = max_diff;
 	int retWert = 5;
@@ -88,12 +88,12 @@ void Spielfeld::ReiheLeeren(int reihe)
 	kartenzahl[reihe] = 0;
 }
 
-int Spielfeld::GetKartenAnzahl(int reihe)
+int Spielfeld::GetKartenAnzahl(int reihe)		//Gibt die Anzahl an Karten in einer Reihe zurück
 {
 	return kartenzahl[reihe];
 }
 
-int Spielfeld::getStrafpunkte(int reihe)
+int Spielfeld::getStrafpunkte(int reihe)		//Gibt die Strafpunkte einer Reihe zurück
 {
 	int summe = 0;
 	for (int i = 0; i < kartenzahl[reihe]; i++)

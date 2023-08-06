@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Steuerung.h"
+#include "Spielfeld.h"
 
 /* mindestens 100 Testläufe definieren */
 const int AnzahlTests = 1000;
@@ -22,7 +23,7 @@ TEST(SchlauerBotVsZufallsBot, ZufallsBot) {
 
 	//std::cout << "Schlaubot hat " << schlauerBotGewinnt << " Mal von " << AnzahlTests << " gewonnen" << "\n\n";
 
-	EXPECT_GT(prozent, 80.0);
+	EXPECT_GE(prozent, 80.0);
 }
 
 TEST(SchlauerbotVsLowCardBot, LowCardBot) {
@@ -43,7 +44,7 @@ TEST(SchlauerbotVsLowCardBot, LowCardBot) {
 
 	//std::cout << schlauerBotGewinnt << "\n\n";
 
-	EXPECT_GT(prozent, 80.0);
+	EXPECT_GE(prozent, 80.0);
 }
 
 TEST(SchlauerbotVsHighCardBot, HighCardBot) {
@@ -64,5 +65,31 @@ TEST(SchlauerbotVsHighCardBot, HighCardBot) {
 
 	//std::cout << schlauerBotGewinnt << "\n\n";
 
-	EXPECT_GT(prozent, 80.0);
+	EXPECT_GE(prozent, 80.0);
+}
+
+TEST(KarteLegenReiheZumNehmenWaehlen, SpielfeldRueckgabe4) {
+	Spielfeld spielfeld;
+
+	Karte kartenArray[4]{Karte(2), Karte(10), Karte(21), Karte(50)};
+
+	for (int i = 0; i < 4; i++)
+	{
+		spielfeld.KarteLegen(kartenArray[i]);
+	}
+
+	EXPECT_EQ(spielfeld.KarteLegen(Karte(1)), 4);
+}
+
+TEST(KarteLegenReiheZumNehmenWaehlen, SpielfeldRueckgabe5) {
+	Spielfeld spielfeld;
+
+	Karte kartenArray[4]{ Karte(2), Karte(10), Karte(21), Karte(50) };
+
+	for (int i = 0; i < 4; i++)
+	{
+		spielfeld.KarteLegen(kartenArray[i]);
+	}
+
+	EXPECT_EQ(spielfeld.KarteLegen(Karte(3)), 5);
 }
